@@ -1,4 +1,5 @@
 using System;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,11 @@ namespace WebApplication
             // });
             // 将路由映射到controller，没有 MapControllers 这个，是无法通过预期的url访问到controller的
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterType<string>().Named<string>("autofac");
         }
     }
 }
