@@ -15,6 +15,7 @@ namespace WebApplication
             Console.WriteLine("WebApplication.Startup.ConfigureServices invoke");
             services.AddMvc().AddControllersAsServices();
             services.AddSingleton<MyService>();
+            services.AddTransient<MyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
