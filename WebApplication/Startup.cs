@@ -1,7 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,6 +14,7 @@ namespace WebApplication
         {
             Console.WriteLine("WebApplication.Startup.ConfigureServices invoke");
             services.AddMvc().AddControllersAsServices();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,11 +26,12 @@ namespace WebApplication
             }
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
-            });
+            //
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
+            // });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

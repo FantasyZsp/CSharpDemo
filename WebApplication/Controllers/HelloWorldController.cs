@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
 {
-    [Route("api/[controller]")]
-    public class HelloWordController : Controller
+    // [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class HelloWorldController : Controller
     {
-        public HelloWordController()
+        public HelloWorldController()
         {
             Console.WriteLine("HelloWordController constructor invoke");
         }
