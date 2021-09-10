@@ -1,5 +1,4 @@
 using System;
-using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +15,7 @@ namespace WebApplication
             Console.WriteLine("WebApplication.Startup.ConfigureServices invoke");
             services.AddMvc().AddControllersAsServices();
             services.AddSingleton<MyService>();
-            services.AddTransient<MyService>();
+            // services.AddTransient<MyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,9 +36,9 @@ namespace WebApplication
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            builder.RegisterType<string>().Named<string>("autofac");
-        }
+        // public void ConfigureContainer(ContainerBuilder builder)
+        // {
+        //     builder.RegisterType<string>().Named<string>("autofac");
+        // }
     }
 }

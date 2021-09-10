@@ -1,5 +1,4 @@
 using System;
-using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -25,7 +24,7 @@ namespace WebApplication
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // 使用autofac IOC容器
+                // .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // 使用autofac IOC容器
                 .ConfigureWebHostDefaults(webHostBuilder =>
                 {
                     Console.WriteLine($"WebHostDefaults:{_invoked++}");
