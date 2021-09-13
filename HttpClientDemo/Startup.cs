@@ -1,5 +1,3 @@
-using System;
-using HttpClientDemo.Demo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,8 +13,6 @@ namespace HttpClientDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-
-            services.AddHttpClient<MyHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5001/"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

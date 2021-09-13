@@ -9,6 +9,13 @@
       <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+      <PackageReference Include="WebApiClient.Extensions.Autofac" Version="2.0.3" />
+      <PackageReference Include="WebApiClientCore" Version="2.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\HttpClientDemo\HttpClientDemo.csproj" />
     </ItemGroup>
 
 </Project>

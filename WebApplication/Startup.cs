@@ -1,6 +1,7 @@
 using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using HttpClientDemo.Demo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,17 @@ namespace WebApplication
             services.AddMvc().AddControllersAsServices();
             services.AddSingleton<MyService>();
             // services.AddTransient<MyService>();
+
+            services.AddHttpClient<MyHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5001/"));
+
+            // var baseAdder = new Uri("http://localhost:5000/");
+            // services
+            //     .AddHttpApi<IGirlWebApiClient>()
+            //     .ConfigureHttpApi(configOptions => configOptions.HttpHost = baseAdder)
+            //     // .ConfigureHttpClient(c => c.BaseAddress = baseAdder)
+            //     ;
+
+            ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +65,10 @@ namespace WebApplication
             Console.WriteLine("WebApplication.Startup.ConfigureContainer invoke");
             builder.RegisterType<EchoService>().Named<IEchoService>("iEchoService");
             builder.RegisterType<EchoService>().Named<EchoService>("echoService");
+            // var host = new Uri("http://localhost:5000/");
+            // builder.RegisterHttpApi<IGirlWebApiClient>()
+            //     .ConfigureHttpApiConfig(configOptions => configOptions.HttpHost = host);
+            builder.RegisterModule<WebApiClientRegisterModule>();
         }
     }
 }
