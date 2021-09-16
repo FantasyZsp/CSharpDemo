@@ -1,18 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Common.Dto;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Client.Girl.Rest;
+using WebApplication.model;
 
 namespace WebApplication.Controllers
 {
     [Route("/api/[controller]")]
     public class GirlController : ControllerBase
     {
-        private readonly IGirlWebApiClient girlWebApiClient;
+        private readonly IGirlWebApiClient _girlWebApiClient;
 
         public GirlController(IGirlWebApiClient girlWebApiClient)
         {
-            this.girlWebApiClient = girlWebApiClient;
+            _girlWebApiClient = girlWebApiClient;
+            Console.WriteLine($"GirlController construct with _girlWebApiClient hashcode {_girlWebApiClient.GetHashCode()}");
         }
 
         [HttpGet]
@@ -37,13 +40,13 @@ namespace WebApplication.Controllers
         [HttpGet("byRestClient")]
         public async Task<Girl> ByRestClient(string id)
         {
-            return await girlWebApiClient.FindById("byRestClient");
+            return await _girlWebApiClient.FindById("byRestClient");
         }
 
         [HttpGet("byRestClientJson")]
         public async Task<RestResult<Girl>> ByRestClientJson(string id)
         {
-            return await girlWebApiClient.FindByIdJson("byRestClientJson");
+            return await _girlWebApiClient.FindByIdJson("byRestClientJson");
         }
     }
 }

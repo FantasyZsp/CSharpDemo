@@ -13,6 +13,10 @@ namespace WebApplication
      * AppConfiguration:2
      * WebApplication.Startup.ConfigureServices invoke
      * Services:3
+     * WebApplication.Startup.ConfigureContainer invoke
+     * WebApplication.Startup.Configure invoke
+     *
+     * 
      */
     public static class Program
     {
@@ -34,14 +38,8 @@ namespace WebApplication
                         // 因为本质上是在追加action。
                         .UseStartup<Startup>();
                 })
-                .ConfigureHostConfiguration(configurationBuilder =>
-                {
-                    Console.WriteLine($"HostConfiguration:{_invoked++}");
-                })
-                .ConfigureAppConfiguration(configurationBuilder =>
-                {
-                    Console.WriteLine($"AppConfiguration:{_invoked++}");
-                })
+                .ConfigureHostConfiguration(configurationBuilder => { Console.WriteLine($"HostConfiguration:{_invoked++}"); })
+                .ConfigureAppConfiguration(configurationBuilder => { Console.WriteLine($"AppConfiguration:{_invoked++}"); })
                 .ConfigureServices(collection => { Console.WriteLine($"Services:{_invoked++}"); });
     }
 }

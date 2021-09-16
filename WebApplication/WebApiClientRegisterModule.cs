@@ -9,10 +9,9 @@ namespace WebApplication
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // TODO 外部化配置 packageRepositoryHost
-            var packageRepositoryHost = new Uri("http://localhost:5000/");
+            var host = new Uri("http://localhost:5000/");
             builder.RegisterHttpApi<IGirlWebApiClient>()
-                .ConfigureHttpApiConfig(configOptions => configOptions.HttpHost = packageRepositoryHost);
+                .ConfigureHttpApiConfig(configOptions => configOptions.HttpHost = host);
         }
     }
 }

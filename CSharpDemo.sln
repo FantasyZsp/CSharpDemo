@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{087295E3-4BB2-4970-9404-6AC970D08653}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutofacExample", "AutofacExample\AutofacExample.csproj", "{C3C373E3-8FC7-4D7E-9BE5-9E5D8206B437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{087295E3-4BB2-4970-9404-6AC970D08653}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087295E3-4BB2-4970-9404-6AC970D08653}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087295E3-4BB2-4970-9404-6AC970D08653}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C373E3-8FC7-4D7E-9BE5-9E5D8206B437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C373E3-8FC7-4D7E-9BE5-9E5D8206B437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C373E3-8FC7-4D7E-9BE5-9E5D8206B437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C373E3-8FC7-4D7E-9BE5-9E5D8206B437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

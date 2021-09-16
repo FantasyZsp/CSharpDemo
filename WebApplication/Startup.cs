@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using HttpClientDemo.Demo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication.Services;
 
@@ -12,6 +13,13 @@ namespace WebApplication
     public class Startup
     {
         private ILifetimeScope AutofacContainer { get; set; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -39,7 +47,7 @@ namespace WebApplication
         {
             Console.WriteLine("WebApplication.Startup.Configure invoke");
 
-            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
             var iEchoService = AutofacContainer.ResolveNamed<IEchoService>("iEchoService");
             // var echoService = AutofacContainer.ResolveNamed<IEchoService>("echoService");
             // Console.WriteLine($"iEchoService is equal to echoService? {iEchoService == echoService}");
@@ -69,6 +77,10 @@ namespace WebApplication
             // builder.RegisterHttpApi<IGirlWebApiClient>()
             //     .ConfigureHttpApiConfig(configOptions => configOptions.HttpHost = host);
             builder.RegisterModule<WebApiClientRegisterModule>();
+
+            // 解析多级json配置
+            var properties = Configuration.GetSection("MQConnections:Mq1").Get<MqProperties>();
+            Console.WriteLine(properties);
         }
     }
 }

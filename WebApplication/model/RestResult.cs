@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace WebApplication
+﻿namespace WebApplication.model
 {
     public class RestResult<T>
     {

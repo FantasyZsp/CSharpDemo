@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.Attributes;
+using WebApplication.model;
 
 namespace WebApplication.Client.Girl.Rest
 {
