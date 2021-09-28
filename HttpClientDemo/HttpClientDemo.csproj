@@ -8,8 +8,4 @@
       <ProjectReference Include="..\Common\Common.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <PackageReference Include="WebApiClientCore" Version="2.0.2" />
-    </ItemGroup>
-
 </Project>

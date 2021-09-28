@@ -21,7 +21,10 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<Girl> FindById(string id)
         {
-            return new Girl {Id = id, Name = "FindById", Age = 18};
+            var requestHeader = HttpContext.Request.Headers["Authorization"];
+            var requestHeader2 = HttpContext.Request.Headers["CustomHeader"];
+
+            return new Girl {Id = id, Name = $"{requestHeader.ToString()} ==  {requestHeader2.ToString()}", Age = 18};
         }
 
         [HttpGet("json")]
@@ -40,7 +43,9 @@ namespace WebApplication.Controllers
         [HttpGet("byRestClient")]
         public async Task<Girl> ByRestClient(string id)
         {
-            return await _girlWebApiClient.FindById("byRestClient");
+            var requestHeader = HttpContext.Request.Headers["Authorization"];
+
+            return await _girlWebApiClient.FindById($"byRestClient with {requestHeader.ToString()}");
         }
 
         [HttpGet("byRestClientJson")]

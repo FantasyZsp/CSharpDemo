@@ -1,11 +1,11 @@
 using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using HttpClientDemo.Demo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using WebApplication.Services;
 
 namespace WebApplication
@@ -30,7 +30,7 @@ namespace WebApplication
             services.AddSingleton<MyService>();
             // services.AddTransient<MyService>();
 
-            services.AddHttpClient<MyHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5001/"));
+            // services.AddHttpClient<MyHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5001/"));
 
             // var baseAdder = new Uri("http://localhost:5000/");
             // services
@@ -80,7 +80,7 @@ namespace WebApplication
 
             // 解析多级json配置
             var properties = Configuration.GetSection("MQConnections:Mq1").Get<MqProperties>();
-            Console.WriteLine(properties);
+            Console.WriteLine(JsonConvert.SerializeObject(properties));
         }
     }
 }
