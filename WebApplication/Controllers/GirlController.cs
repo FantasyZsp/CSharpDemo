@@ -44,8 +44,9 @@ namespace WebApplication.Controllers
         public async Task<Girl> ByRestClient(string id)
         {
             var requestHeader = HttpContext.Request.Headers["Authorization"];
+            Console.WriteLine(requestHeader.ToString());
 
-            return await _girlWebApiClient.FindById($"byRestClient with {requestHeader.ToString()}");
+            return await _girlWebApiClient.FindById($"byRestClient with {requestHeader.ToString()}", requestHeader.ToString());
         }
 
         [HttpGet("byRestClientJson")]
