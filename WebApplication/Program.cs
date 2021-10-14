@@ -1,7 +1,12 @@
 using System;
+using System.Threading;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
+using Serilog.Formatting.Compact;
 
 namespace WebApplication
 {
@@ -24,6 +29,7 @@ namespace WebApplication
 
         public static void Main(string[] args)
         {
+            ConfigLogger();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -41,5 +47,40 @@ namespace WebApplication
                 .ConfigureHostConfiguration(configurationBuilder => { Console.WriteLine($"HostConfiguration:{_invoked++}"); })
                 .ConfigureAppConfiguration(configurationBuilder => { Console.WriteLine($"AppConfiguration:{_invoked++}"); })
                 .ConfigureServices(collection => { Console.WriteLine($"Services:{_invoked++}"); });
+
+
+        private static void ConfigLogger()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .Enrich.With(new ThreadIdEnricher())
+                .Enrich.WithProperty("Version", "1.0.0")
+                .MinimumLevel.Debug()
+                // .WriteTo.Console()
+                // .WriteTo.Console(outputTemplate: "{Timestamp:HH:mm} [{Level:u3}] [{ThreadId}] {Message:lj}{NewLine}{Exception}")
+                .WriteTo.Console(new RenderedCompactJsonFormatter())
+                .CreateLogger();
+            var jobLog = Log.ForContext("app", "dotnetDemo");
+
+            jobLog.Debug("Disk quota {Quota} MB exceeded by {User}, {Hi} {app}", 1024, new
+            {
+                Id = 1,
+                Name = "user"
+            }, "hello");
+            jobLog.Warning("Disk quota {Quota} MB exceeded by {@User}, {@Hi}", 1024, new
+            {
+                Id = 1,
+                Name = "user"
+            }, "hello");
+        }
+
+        private class ThreadIdEnricher : ILogEventEnricher
+        {
+            public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+            {
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty(
+                    "ThreadId", Thread.CurrentThread.ManagedThreadId));
+            }
+        }
     }
 }

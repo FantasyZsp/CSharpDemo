@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using WebApplication.Services;
 
 namespace WebApplication.Controllers
@@ -13,6 +14,8 @@ namespace WebApplication.Controllers
     {
         private static long _counter;
         // private readonly ILifetimeScope _autofacContainer;
+
+        private readonly ILogger _logger = Serilog.Log.ForContext<HelloWorldController>();
 
         public HelloWorldController(
         )
@@ -35,10 +38,20 @@ namespace WebApplication.Controllers
         {
             // var resolveNamed = _autofacContainer.ResolveNamed<string>("autofac"); // ex,TODO 查看异常原因
 
-
             var enumerable = myServices as MyService[] ?? myServices.ToArray();
             return
                 $"Hello,{this.GetHashCode()}, {typeof(MyService)} with {enumerable.Length}:{string.Join(",", enumerable.Select(s => s.GetHashCode().ToString()).ToArray())}! + {Interlocked.Increment(ref _counter)}";
+        }
+
+        [HttpGet]
+        public string Log()
+        {
+            _logger.Debug("hello {@User}, time is {Time}", new
+            {
+                Id = 1,
+                Name = "user"
+            }, DateTime.Now);
+            return "x";
         }
     }
 }

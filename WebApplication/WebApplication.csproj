@@ -2,14 +2,23 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Autofac" Version="6.3.0" />
       <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
       <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
-      <PackageReference Include="WebApiClient.Extensions.Autofac" Version="2.0.3" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="Serilog" Version="2.10.0" />
+      <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+      <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+      <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+      <PackageReference Include="WebAPIClient" Version="1.0.3.4" />
+      <PackageReference Include="WebApiClient.Extensions.Autofac" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
