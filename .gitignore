@@ -3,3 +3,4 @@ obj
 global.json
 bin
 .vs
+WebApplication/logs/
