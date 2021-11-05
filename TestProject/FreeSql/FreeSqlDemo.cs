@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using FreeSql;
-using FreeSql.Internal;
+﻿using FreeSql;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
@@ -88,7 +85,7 @@ namespace TestProject.FreeSql
 
 
         [Fact]
-        public void Test_Update_OnColumn()
+        public void Test_Update_OnColumnAndWhere()
         {
             var freeSql = CreateLocalFreeSql();
             var customer = new Customer
@@ -105,15 +102,37 @@ namespace TestProject.FreeSql
                 .Set(c => c.Email, customer.Email)
                 .Set(c => c.Name, customer.Name + "1")
                 // .Set(c => customer.Config)
-                .Where(c => c.Id == customer.Id)
+                .Where(c => c.Name == customer.Name)
                 .ExecuteAffrows();
-
-            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(customer));
             _testOutputHelper.WriteLine(executeAffrows.ToString());
         }
 
         [Fact]
-        public void Test_Update_WhenNotNullAndWhereNotOnlyId()
+        public void Test_Update_OnColumnAndWhere_SetIfWhenTrue()
+        {
+            var freeSql = CreateLocalFreeSql();
+            var customer = new Customer
+            {
+                Id = 1,
+                Name = "1",
+                Email = "testEmail4",
+                CardId = 1004,
+                Mark = "mark4",
+                Config = "config4"
+            };
+            var executeAffrows = freeSql
+                .Update<Customer>()
+                .SetIf(customer.Email != null, c => c.Email, customer.Email)
+                .Set(c => c.Name, customer.Name + "1")
+                // .Set(c => customer.Config)
+                .Where(c => c.Name == customer.Name)
+                .ExecuteAffrows();
+
+            _testOutputHelper.WriteLine(executeAffrows.ToString());
+        }
+
+        [Fact]
+        public void Test_Update_SetWhenNotNullAndWhereAppendWithId()
         {
             var freeSql = CreateLocalFreeSql();
             var customer = new Customer
@@ -132,7 +151,6 @@ namespace TestProject.FreeSql
                 .Where(c => c.Name == customer.Name) // 这里在id的前提下追加条件更新，customer给出的值必须有id
                 .ExecuteAffrows();
 
-            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(customer));
             _testOutputHelper.WriteLine(executeAffrows.ToString());
         }
 
@@ -174,6 +192,34 @@ namespace TestProject.FreeSql
                 .Set(c => c.Email, customer.Email)
                 .Set(c => c.Name, customer.Name + "1")
                 // .Set(c => customer.Config)
+                .Where(c => c.Name == customer.Name)
+                .ExecuteAffrows();
+            _testOutputHelper.WriteLine(executeAffrows.ToString());
+        }
+
+        [Fact]
+        public void Test_Update_SetColumnAndOnlyWhereColumnExceptId2()
+        {
+            var freeSql = CreateLocalFreeSql();
+            var customer = new Customer
+            {
+                Id = 1,
+                Name = "1",
+                Email = "testEmail4",
+                CardId = 1004,
+                Mark = "mark4",
+                Config = "config4"
+            };
+            var executeAffrows = freeSql
+                .Update<Customer>()
+                .Set(c => new Customer
+                {
+                    Name = "1",
+                    Email = "testEmail4",
+                    CardId = null,
+                    Mark = "mark4",
+                    Config = "config4"
+                })
                 .Where(c => c.Name == customer.Name)
                 .ExecuteAffrows();
             _testOutputHelper.WriteLine(executeAffrows.ToString());
@@ -241,16 +287,6 @@ namespace TestProject.FreeSql
 
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(customer));
             _testOutputHelper.WriteLine(executeAffrows.ToString());
-        }
-
-        public class Customer
-        {
-            public uint? Id { get; set; }
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public int? CardId { get; set; }
-            public string Mark { get; set; }
-            public string Config { get; set; }
         }
     }
 }
