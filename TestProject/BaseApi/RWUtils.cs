@@ -50,6 +50,15 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void DateTime_DeSerialize_Test()
+        {
+            int? page = 10;
+            page ??= 0;
+            page += 1;
+            _testOutputHelper.WriteLine(page.ToString());
+        }
+
+        [Fact]
         public void ConcurrentDic_RW_Test()
         {
             var concurrentDictionary = new ConcurrentDictionary<string, string>();
@@ -65,7 +74,7 @@ namespace TestProject.BaseApi
                 Thread.Sleep(1000);
                 concurrentQueue.Enqueue("222");
             });
-            
+
             Parallel.Invoke(() =>
             {
                 Thread.Sleep(1000);
@@ -78,6 +87,16 @@ namespace TestProject.BaseApi
             {
                 _testOutputHelper.WriteLine(s);
             }
+        }
+
+        [Fact]
+        public void StringReplace_Test()
+        {
+            const string src = "aaa";
+            var replace = src.Replace("a", "b");
+            _testOutputHelper.WriteLine(replace);
+            
+            
         }
     }
 }

@@ -28,6 +28,17 @@ namespace WebApplication.Controllers
                               $" and {logger.GetHashCode()} and {_staticLogger.GetHashCode()}");
         }
 
+        [HttpGet("error")]
+        public string LogError(string flag)
+        {
+            if ("error".Equals(flag))
+            {
+                throw new ArgumentException("xxxERROR");
+            }
+
+            return "x";
+        }
+        
         [HttpGet]
         public async Task<Girl> FindById(string id)
         {

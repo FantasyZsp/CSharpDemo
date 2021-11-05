@@ -59,6 +59,7 @@ namespace WebApplication
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(config)
+                .Enrich.WithThreadName()
                 .CreateLogger();
             var jobLog = Log.ForContext("app", "dotnetDemo");
             jobLog.Information("Disk quota {Quota} MB exceeded by {@User}, {@Hi}", 1024, new
