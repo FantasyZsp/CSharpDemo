@@ -1,4 +1,5 @@
-﻿using FreeSql;
+﻿using System.Collections.Generic;
+using FreeSql;
 using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
@@ -285,7 +286,61 @@ namespace TestProject.FreeSql
                 .Insert(customer)
                 .ExecuteIdentity();
 
-            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(customer));
+            _testOutputHelper.WriteLine(executeAffrows.ToString());
+        }
+
+        [Fact]
+        public void Test_InsertBatch()
+        {
+            var freeSql = CreateLocalFreeSql();
+            var customer = new Customer
+            {
+                Id = null,
+                Name = "Test_InsertBatch-5",
+                Email = "testEmail4",
+                CardId = 1004,
+                Mark = "mark4",
+                Config = "config4"
+            };
+
+            var customer2 = new Customer
+            {
+                Id = null,
+                Name = "Test_InsertBatch-6",
+                Email = "testEmail4",
+                CardId = 1004,
+                Mark = "mark4",
+                Config = "config4"
+            };
+            var list = new List<Customer>() {customer, customer2};
+
+            var executeAffRows = freeSql
+                .Insert(list)
+                .ExecuteIdentity();
+
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(list));
+            _testOutputHelper.WriteLine(executeAffRows.ToString());
+        }
+
+
+        [Fact]
+        public void Test_Api()
+        {
+            var freeSql = CreateLocalFreeSql();
+            var customer = new Customer
+            {
+                Id = null,
+                Name = "222-33",
+                Email = "testEmail4",
+                CardId = 1004,
+                Mark = "mark4",
+                Config = "config4"
+            };
+            var executeAffrows = freeSql
+                .Insert(customer)
+                .ExecuteIdentity();
+
+
             _testOutputHelper.WriteLine(executeAffrows.ToString());
         }
     }
