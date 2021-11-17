@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FreeSql;
 using Newtonsoft.Json;
 using Xunit;
@@ -55,6 +56,30 @@ namespace TestProject.FreeSql
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(customer));
             _testOutputHelper.WriteLine(executeAffrows.ToString());
         }
+
+
+        [Fact]
+        public void Test_InsertOrUpdateStringId()
+        {
+            var freeSql = CreateLocalFreeSql();
+            var now = DateTime.UtcNow;
+            var student = new Student
+            {
+                // StuId = $"{Guid.NewGuid():N}",
+                StuId = $"006f526ef7cc43ccb1a7472ab3b80bf5",
+                Name = "testInsertOrUpdateStu4444444",
+                Email = "555555555555",
+                CreateTime = now,
+                UpdateTime = now
+            };
+
+            var executeAffRows = freeSql.InsertOrUpdate<Student>()
+                .SetSource(student)
+                .UpdateColumns(new[] {"Email"})
+                .ExecuteAffrows();
+            _testOutputHelper.WriteLine(executeAffRows.ToString());
+        }
+
 
         /// <summary>
         ///  TODO insert 如何传参
