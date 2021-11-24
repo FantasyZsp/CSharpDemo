@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SqlSugar;
+using TestProject.FreeSql;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -323,25 +326,37 @@ namespace TestProject.SqlSugar
         // }
         //
         //
-        // [Fact]
-        // public void Test_Api()
-        // {
-        //     var sqlSugar = CreateLocalSqlSugar();
-        //     var customer = new Customer
-        //     {
-        //         Id = null,
-        //         Name = "222-33",
-        //         Email = "testEmail4",
-        //         CardId = 1004,
-        //         Mark = "mark4",
-        //         Config = "config4"
-        //     };
-        //     var executeAffrows = sqlSugar
-        //         .Insert(customer)
-        //         .ExecuteIdentity();
-        //
-        //
-        //     _testOutputHelper.WriteLine(executeAffrows.ToString());
-        // }
+        [Fact]
+        public void Test_UpdateBatch()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var customers = sqlSugar.Queryable<Customer>()
+                .Where(customer => customer.Email == "testEmail4xxx")
+                .ToList();
+
+            foreach (var customer in customers)
+            {
+                customer.Email += "xxx";
+                customer.CardId += customer.CardId;
+            }
+
+            var executeAffRows = sqlSugar
+                .Updateable(customers)
+                .UpdateColumns(customer => new {customer.Email})
+                .ExecuteCommand();
+            _testOutputHelper.WriteLine(executeAffRows.ToString());
+        }
+
+        [Fact]
+        public void Test_UpdateBatchById()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var names = new List<string> {"testInsertOrUpdate", "testInsertOrUpdate2", "testInsertOrUpdate3"};
+            var affRows = sqlSugar.Updateable(names.Select(name => new Customer {Name = name, Mark = "UpdateBatch"}).ToList())
+                .UpdateColumns(task => new {task.Mark})
+                // .Where(task => names.Contains(task.Name))
+                .ExecuteCommand();
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
     }
 }

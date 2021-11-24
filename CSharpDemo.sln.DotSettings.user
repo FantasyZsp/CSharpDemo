@@ -13,5 +13,8 @@
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.CollectionUtils.Test_Any&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_InsertOrUpdateStringId&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_SugarInsertOrUpdateStringId&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.SerializeTest.Test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_UpdateBatch&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_UpdateBatchById&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
