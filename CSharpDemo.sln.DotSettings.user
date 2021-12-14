@@ -1,20 +1,14 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=22e02a2f_002Dbe09_002D4ac6_002D9b2b_002De8148b3ef666/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ConcurrentDic_RW_Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=27170f71_002Daa9c_002D4348_002Db2fa_002D882560acd8a6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test_UpdateBatchById_Repository" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.RwUtils.DateTime_DeSerialize_Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.RwUtils.StringReplace_Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.FreeSqlDemo.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.FreeSqlDemo.Test_Sql&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.FreeSqlDemo.Test_Update&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.FreeSqlDemo.Test_Insert&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.FreeSql.FreeSqlDemo.Test_Update&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.FreeSql.FreeSqlDemo&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.CollectionUtils.Test_Any&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_InsertOrUpdateStringId&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_SugarInsertOrUpdateStringId&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.SerializeTest.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_UpdateBatch&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_UpdateBatchById&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_UpdateNonNullColumnsByWhere_SimpleClient&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.StreamOpTest.Test_ToDic&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.TimeOps.Test_DateTime_Equals&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.CopyOps.Copy&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarDemo.Test_Cas_SimpleClient&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.StreamOpTest.Test_StreamMinMax&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.TimeOps.Test_DateTime_Seconds&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.BaseApi.TimeOps.Test_DateTime_FormatMinutes&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net5.0::TestProject.SqlSugar.SqlSugarQueryDemo.Test_Join_SimpleClient&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

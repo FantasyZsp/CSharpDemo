@@ -2,14 +2,13 @@
 
 namespace TestProject.SqlSugar
 {
-    public class Customer
+    [SugarTable("card_sugar")]
+    public class CardSugar
     {
         [SugarColumn(IsIdentity = true, IsPrimaryKey = true)]
-        public string Name { get; set; }
-
-        public string Email { get; set; }
         public int? CardId { get; set; }
+
+        public string CardNo { get; set; }
         public string Mark { get; set; }
-        public string Config { get; set; }
     }
 }

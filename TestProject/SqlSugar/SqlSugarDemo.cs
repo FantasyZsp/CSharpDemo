@@ -27,10 +27,10 @@ namespace TestProject.SqlSugar
             });
             db.Aop.OnLogExecuting = (sql, pars) =>
             {
-                foreach (var sugarParameter in pars)
-                {
-                    _testOutputHelper.WriteLine(sugarParameter.Value.ToString());
-                }
+                // foreach (var sugarParameter in pars)
+                // {
+                //     _testOutputHelper.WriteLine(sugarParameter.Value?.ToString());
+                // }
 
                 _testOutputHelper.WriteLine(sql); //输出sql,查看执行sql
             };
@@ -330,7 +330,7 @@ namespace TestProject.SqlSugar
         public void Test_UpdateBatch()
         {
             var sqlSugar = CreateLocalSqlSugar();
-            var customers = sqlSugar.Queryable<Customer>()
+            var customers = sqlSugar.Queryable<CustomerSugar>()
                 .Where(customer => customer.Email == "testEmail4xxx")
                 .ToList();
 
@@ -352,10 +352,77 @@ namespace TestProject.SqlSugar
         {
             var sqlSugar = CreateLocalSqlSugar();
             var names = new List<string> {"testInsertOrUpdate", "testInsertOrUpdate2", "testInsertOrUpdate3"};
-            var affRows = sqlSugar.Updateable(names.Select(name => new Customer {Name = name, Mark = "UpdateBatch"}).ToList())
+            var affRows = sqlSugar.Updateable(names.Select(name => new CustomerSugar {Name = name, Mark = "UpdateBatch"}).ToList())
                 .UpdateColumns(task => new {task.Mark})
                 // .Where(task => names.Contains(task.Name))
                 .ExecuteCommand();
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public void Test_UpdateAllColumnById_SimpleClient()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            var customer = new CustomerSugar
+            {
+                Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", CardId = 11, Config = "config", Email = "email"
+            };
+
+            var affRows = simpleClient.Update(customer); // customer属性不能有null,是因为对sql的监听
+
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public void Test_UpdateColumnsByWhere_SimpleClient()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            var customer = new CustomerSugar
+            {
+                Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", CardId = 11, Config = "config", Email = "email"
+            };
+
+            var affRows = simpleClient.Update(cc => new CustomerSugar
+            {
+                Mark = cc.Mark
+            }, cc => cc.CardId == customer.CardId && cc.Name == customer.Name);
+
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public void Test_UpdateNonNullColumnsByWhere_SimpleClient()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            var customer = new CustomerSugar
+            {
+                Name = "Test_UpdateNonNullColumnsByWhere_SimpleClient", Mark = "2333", Config = "xxx"
+            };
+            var affRows = simpleClient.AsUpdateable(customer)
+                .IgnoreColumns(true)
+                .Where(cc => cc.Mark == customer.Mark)
+                .ExecuteCommand();
+
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public async void Test_Cas_SimpleClient()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            var customer = new CustomerSugar
+            {
+                Name = "Test_Cas_SimpleClient", Mark = "33333333", Config = "44444"
+            };
+            var affRows = await simpleClient.AsUpdateable(customer)
+                .UpdateColumns(customerSugar => new {customerSugar.Mark, customerSugar.Config})
+                .Where(customerSugar => customerSugar.Mark == "2333")
+                .ExecuteCommandAsync();
+
             _testOutputHelper.WriteLine(affRows.ToString());
         }
     }
