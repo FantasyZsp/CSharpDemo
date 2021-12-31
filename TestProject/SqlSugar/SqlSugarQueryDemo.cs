@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SqlSugar;
-using TestProject.FreeSql;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -28,10 +24,10 @@ namespace TestProject.SqlSugar
             });
             db.Aop.OnLogExecuting = (sql, pars) =>
             {
-                // foreach (var sugarParameter in pars)
-                // {
-                //     _testOutputHelper.WriteLine(sugarParameter.Value?.ToString());
-                // }
+                foreach (var sugarParameter in pars)
+                {
+                    _testOutputHelper.WriteLine(sugarParameter.Value?.ToString());
+                }
 
                 _testOutputHelper.WriteLine(sql); //输出sql,查看执行sql
             };
@@ -60,6 +56,22 @@ namespace TestProject.SqlSugar
                 .OrderBy(cus => cus.Name)
                 .ToPageListAsync(0, 10);
 
+
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(sugars));
+        }
+
+        [Fact]
+        public async void Test_SelectForUpdate()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            // var customer = new CustomerSugar();
+            // var card = new CardSugar();
+
+            var sugars = await simpleClient.AsQueryable()
+                .Where(cus => cus.Name == "Test_InsertBatch-1")
+                .With("for update")
+                .SingleAsync();
 
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(sugars));
         }
