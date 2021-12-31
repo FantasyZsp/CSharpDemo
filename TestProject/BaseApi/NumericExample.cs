@@ -13,7 +13,7 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
-        public void TestString()
+        public void TestNull()
         {
             uint? a = 100;
             uint? b = null;
