@@ -92,8 +92,10 @@ namespace TestProject.BaseApi
 
             girls.Sort((g1, g2) => g2.Age.CompareTo(g1.Age));
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls));
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls[0]));
             girls.Sort((g1, g2) => Compare(g1.Id, g2.Id, StringComparison.Ordinal));
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls));
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls[0]));
         }
     }
 }
