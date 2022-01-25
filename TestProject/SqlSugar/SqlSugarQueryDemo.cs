@@ -75,5 +75,27 @@ namespace TestProject.SqlSugar
 
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(sugars));
         }
+
+        [Fact]
+        public async void Test_QuerySimpleBool()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+
+            var sugars = await simpleClient.Context.Queryable<CustomerSugar>()
+                .InnerJoin<CardSugar>((cus, card) => cus.CardId == card.CardId)
+                .Where((cus, card) => cus.CardId == 1)
+                .Select((cus, card) => new
+                {
+                    CardId = cus.CardId,
+                    CardNo = card.CardNo,
+                    Name = cus.Name
+                })
+                .OrderBy(cus => cus.Name)
+                .ToPageListAsync(0, 10);
+
+
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(sugars));
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Common;
+﻿using Common;
 using Common.Dto;
 using Newtonsoft.Json;
 using Xunit;
@@ -27,5 +26,17 @@ namespace TestProject.BaseApi
             };
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(BeanUtils.Copy<Girl>(girl)));
         }
+
+        [Fact]
+        public void NewValue()
+        {
+            var defaultValue = new PocoDefaultValue { };
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(defaultValue));
+        }
+    }
+
+    public class PocoDefaultValue
+    {
+        public string Test { get; set; } = "test";
     }
 }

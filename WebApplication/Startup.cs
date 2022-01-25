@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using WebApplication.Middlewares;
 using WebApplication.Services;
 
 namespace WebApplication
@@ -59,6 +60,8 @@ namespace WebApplication
             // }
 
             app.UseRouting();
+            app.UseMiddleware<ObsoleteControllerLogMiddleware>();
+
             //
             // app.UseEndpoints(endpoints =>
             // {

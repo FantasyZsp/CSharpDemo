@@ -26,6 +26,13 @@ namespace TestProject.BaseApi
             };
             var dictionary = list.Distinct().ToDictionary(str => str);
             _testOutputHelper.WriteLine(dictionary.ToString());
+
+
+            var firstOrDefault = list.FirstOrDefault(ss => ss == "xx");
+
+            _testOutputHelper.WriteLine("xxxxx");
+            _testOutputHelper.WriteLine(firstOrDefault ??= "xx");
+            _testOutputHelper.WriteLine(firstOrDefault);
         }
 
         [Fact]
