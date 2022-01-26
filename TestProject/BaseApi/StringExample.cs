@@ -36,10 +36,41 @@ namespace TestProject.BaseApi
             const string textWithUnderLine = "/CQAAAA/";
             const string blank = " ";
 
-            // ReverseStringWithSplit(path);
-            // ReverseStringWithSplit(text);
-            // ReverseStringWithSplit(textWithUnderLine);
+            ReverseStringWithSplit("xxx");
+            ReverseStringWithSplit(path);
+            ReverseStringWithSplit(text);
+            ReverseStringWithSplit(textWithUnderLine);
             ReverseStringWithSplit(blank);
+        }
+
+        [Fact]
+        public void Test_PrefixStringArrayWithSplit()
+        {
+            const string path = "/CQAAAA/FgAAAA/";
+            const string text = "/CAAAAA/KQAAAA/TgAAAA/gAAAAA/";
+            const string textWithUnderLine = "/CQAAAA/";
+            const string blank = " ";
+
+            PrefixStringArrayWithSplit("xxx");
+            PrefixStringArrayWithSplit(path);
+            PrefixStringArrayWithSplit(text);
+            PrefixStringArrayWithSplit(textWithUnderLine);
+            PrefixStringArrayWithSplit(blank);
+        }
+
+        [Fact]
+        public void Test_PrefixStringArrayWithSplit2()
+        {
+            const string path = "/CQAAAA/FgAAAA/";
+            const string text = "/CAAAAA/KQAAAA/TgAAAA/gAAAAA/";
+            const string textWithUnderLine = "/CQAAAA/";
+            const string blank = " ";
+
+            PrefixStringArrayWithSplit2("xxx");
+            PrefixStringArrayWithSplit2(path);
+            PrefixStringArrayWithSplit2(text);
+            PrefixStringArrayWithSplit2(textWithUnderLine);
+            PrefixStringArrayWithSplit2(blank);
         }
 
         [Fact]
@@ -94,7 +125,7 @@ namespace TestProject.BaseApi
             // var reversedPathArray = path.Split("/").Where(str => str != "").ToArray().Reverse();
             var reversedPathArray = path.Split("/").Reverse();
             var reversedPath = JsonConvert.SerializeObject(reversedPathArray);
-            // _testOutputHelper.WriteLine(reversedPath);
+            _testOutputHelper.WriteLine(reversedPath);
             var result = "";
             foreach (var str in reversedPathArray)
             {
@@ -102,9 +133,62 @@ namespace TestProject.BaseApi
                 result += "/";
             }
 
+            _testOutputHelper.WriteLine(result);
             result = result[..^1];
             _testOutputHelper.WriteLine(result);
             _testOutputHelper.WriteLine(result.Length.ToString());
+        }
+
+        private void PrefixStringArrayWithSplit(string path)
+        {
+            // _testOutputHelper.WriteLine("===");
+            // _testOutputHelper.WriteLine(path);
+
+            // _testOutputHelper.WriteLine(JsonConvert.SerializeObject(path.Split("/").Where(str => str != "").ToArray()));
+            // var reversedPathArray = path.Split("/").Where(str => str != "").ToArray().Reverse();
+            var prefixArray = path.Split("/");
+            prefixArray = prefixArray.Where(ss => ss != "").ToArray();
+            var prefixArrayStr = JsonConvert.SerializeObject(prefixArray);
+            _testOutputHelper.WriteLine(prefixArrayStr);
+            var result = new List<string>();
+            var lastResult = "/";
+
+            foreach (var prefixSplit in prefixArray)
+            {
+                lastResult = lastResult + prefixSplit + "/";
+
+                result.Add(lastResult);
+            }
+
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(result));
+        }
+
+        private void PrefixStringArrayWithSplit2(string path)
+        {
+            // _testOutputHelper.WriteLine("===");
+            // _testOutputHelper.WriteLine(path);
+
+            // _testOutputHelper.WriteLine(JsonConvert.SerializeObject(path.Split("/").Where(str => str != "").ToArray()));
+            // var reversedPathArray = path.Split("/").Where(str => str != "").ToArray().Reverse();
+            var lastIndexOf = path.LastIndexOf("/", StringComparison.Ordinal);
+            _testOutputHelper.WriteLine(lastIndexOf.ToString());
+
+
+            // var prefixArray = path.Split("/");
+            // prefixArray = prefixArray.Where(ss => ss != "").ToArray();
+            // var prefixArrayStr = JsonConvert.SerializeObject(prefixArray);
+            // _testOutputHelper.WriteLine(prefixArrayStr);
+            // var result = new List<string>();
+            // var lastResult = "/";
+            //
+            // foreach (var prefixSplit in prefixArray)
+            // {
+            //     lastResult = lastResult + prefixSplit + "/";
+            //
+            //     result.Add(lastResult);
+            // }
+            //
+            // _testOutputHelper.WriteLine(JsonConvert.SerializeObject(result));
         }
     }
 }
