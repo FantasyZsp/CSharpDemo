@@ -15,6 +15,7 @@
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_RevertStringWithSplit&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_PrefixStringArrayWithSplit&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_PrefixStringArrayWithSplit2&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.SqlSugar.SqlSugarDemo.Test_Insert&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

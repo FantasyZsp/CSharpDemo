@@ -1,4 +1,5 @@
-﻿using SqlSugar;
+﻿using Newtonsoft.Json;
+using SqlSugar;
 
 namespace TestProject.SqlSugar
 {
@@ -12,5 +13,11 @@ namespace TestProject.SqlSugar
         public int? CardId { get; set; }
         public string Mark { get; set; }
         public string Config { get; set; }
+
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

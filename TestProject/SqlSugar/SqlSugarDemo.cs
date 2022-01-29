@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using SqlSugar;
-using TestProject.FreeSql;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -38,9 +37,7 @@ namespace TestProject.SqlSugar
             return db;
         }
 
-        
-        
-        
+
         [Fact]
         public void Test_SugarInsertOrUpdateStringId()
         {
@@ -60,7 +57,7 @@ namespace TestProject.SqlSugar
                 });
             _testOutputHelper.WriteLine(executeAffRows.ToString());
         }
-        
+
         [Fact]
         public void Test_UpdateBatch()
         {
@@ -157,6 +154,22 @@ namespace TestProject.SqlSugar
                 .UpdateColumns(customerSugar => new {customerSugar.Mark, customerSugar.Config})
                 .Where(customerSugar => customerSugar.Mark == "2333")
                 .ExecuteCommandAsync();
+
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public async void Test_Insert()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CardSugar>();
+            var cardSugar = new CardSugar
+            {
+                CardId = 1230001, Mark = "33333333", CardNo = "44444"
+            };
+            var affRows = await simpleClient.Context.Insertable(cardSugar).ExecuteReturnEntityAsync();
+            // affRows = await simpleClient.AsInsertable(cardSugar)
+            //     .ExecuteReturnEntityAsync();
 
             _testOutputHelper.WriteLine(affRows.ToString());
         }
