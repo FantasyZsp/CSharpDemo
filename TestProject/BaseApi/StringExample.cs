@@ -29,6 +29,13 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void TestStringContains()
+        {
+            const string path = "abc";
+            Assert.Throws<ArgumentNullException>(() => path.Contains(null).ToString());
+        }
+
+        [Fact]
         public void Test_RevertStringWithSplit()
         {
             const string path = "/CQAAAA/FgAAAA/";
