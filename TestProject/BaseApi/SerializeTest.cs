@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using TestProject.FreeSql;
 using Xunit;
 using Xunit.Abstractions;

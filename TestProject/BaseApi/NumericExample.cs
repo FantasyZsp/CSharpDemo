@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace TestProject.BaseApi
@@ -19,6 +20,23 @@ namespace TestProject.BaseApi
             uint? b = null;
             _testOutputHelper.WriteLine(a.GetValueOrDefault().ToString());
             _testOutputHelper.WriteLine(b.GetValueOrDefault().ToString());
+        }
+
+        [Fact]
+        public void TestNullEquals()
+        {
+            uint? a = 100;
+            uint b = 1;
+            uint? c = null;
+            uint? d = 0;
+            _testOutputHelper.WriteLine(d.GetType().BaseType.Name);
+
+
+            _testOutputHelper.WriteLine(a.GetValueOrDefault().ToString());
+            _testOutputHelper.WriteLine(b.ToString());
+
+            _testOutputHelper.WriteLine(c.ToString());
+            _testOutputHelper.WriteLine(d.ToString());
         }
     }
 }
