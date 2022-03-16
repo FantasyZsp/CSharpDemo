@@ -1,4 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AUInt32_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003FAppData_003FRoaming_003FJetBrains_003FRider2021_002E3_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F16e6dcaab0be4156ad31af88b1ed8700a20270_003F05_003F3becfff1_003FUInt32_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\zhaosp\.nuget\packages\sqlsugarcore\5.0.4.2\lib\netstandard2.1\SqlSugar.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.AspNetCore.Http.Extensions.dll" /&gt;&#xD;
@@ -7,6 +8,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.JsonConvertForLong.Test&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestNullEquals&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.TestStringSub&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0f97ea2c_002D8b90_002D4f61_002D80f3_002Dd6f89b1324f6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test_IdList" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

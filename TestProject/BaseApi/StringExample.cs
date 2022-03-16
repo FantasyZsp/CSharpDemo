@@ -35,6 +35,26 @@ namespace TestProject.BaseApi
             Assert.Throws<ArgumentNullException>(() => path.Contains(null).ToString());
         }
 
+
+        [Fact]
+        public void TestStringSub()
+        {
+            var layout = "1室1厅11厨";
+            var currentLayout = layout;
+
+            var indexOf = layout.IndexOf("厅");
+            if (indexOf != -1)
+            {
+                _testOutputHelper.WriteLine(111.ToString());
+                _testOutputHelper.WriteLine(layout.Substring(0, indexOf + 1));
+            }
+
+
+            _testOutputHelper.WriteLine(indexOf.ToString());
+            _testOutputHelper.WriteLine(layout);
+            _testOutputHelper.WriteLine(currentLayout);
+        }
+
         [Fact]
         public void Test_RevertStringWithSplit()
         {
