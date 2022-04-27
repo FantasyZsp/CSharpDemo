@@ -29,11 +29,11 @@ namespace CSharpDemo
             Console.WriteLine($"PrintAsync {Thread.CurrentThread.ManagedThreadId}");
 
             var sumTask = SumTask();
-            var sumTaskResult =  sumTask.Result;
+            // await sumTask;
             Console.WriteLine($" after SumTask {Thread.CurrentThread.ManagedThreadId}");
         }
 
-        public async Task<int> SumTask()
+        public Task SumTask()
         {
             Console.WriteLine($"build SumTask {Thread.CurrentThread.ManagedThreadId}");
 
@@ -51,7 +51,7 @@ namespace CSharpDemo
             //     Console.WriteLine($"SumTaskResult {sum} by {Thread.CurrentThread.ManagedThreadId}");
             //     return sum;
             // });
-            
+
             Console.WriteLine($"SumTaskResult invoking by {Thread.CurrentThread.ManagedThreadId}");
             int sum = 0;
             for (int i = 0; i < 100000; i++)
@@ -59,10 +59,9 @@ namespace CSharpDemo
                 sum = +i;
             }
 
-            // await File.WriteAllBytesAsync("e.txt", new Byte[10]);
-
+            var task = File.WriteAllBytesAsync("e.txt", new Byte[10]);
             Console.WriteLine($"SumTaskResult {sum} by {Thread.CurrentThread.ManagedThreadId}");
-            return sum;
+            return task;
 
             // return run;
         }
