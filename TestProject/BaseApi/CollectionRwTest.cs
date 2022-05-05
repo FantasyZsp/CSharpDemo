@@ -97,5 +97,27 @@ namespace TestProject.BaseApi
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls));
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls[0]));
         }
+
+        [Fact]
+        public void Test_DistinctBy()
+        {
+            var girls = new List<Girl>
+            {
+                new Girl("5", "name2", 5),
+                new Girl("2", "name", 2),
+                new Girl("4", "name2", 4),
+                new Girl("3", "name2", 3),
+                new Girl("1", "name", 1),
+                new Girl("1", "name11", 2),
+                new Girl("6", "name3", 6)
+            };
+
+            var list = girls.DistinctBy(gg => gg.Name).ToList();
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(list));
+
+            var list2 = new List<Girl>().DistinctBy(gg => gg.Name).ToList();
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(list2));
+
+        }
     }
 }

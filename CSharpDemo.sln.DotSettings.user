@@ -4,34 +4,11 @@
   &lt;Assembly Path="C:\Users\zhaosp\.nuget\packages\sqlsugarcore\5.0.4.2\lib\netstandard2.1\SqlSugar.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\5.0.0\ref\net5.0\Microsoft.AspNetCore.Http.Extensions.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=038b3ea4_002D80e7_002D4423_002D90c8_002Db8fd9d8caebc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=038740fb_002D88bf_002D40ec_002D9979_002D265f7fb072ed/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test_DistinctBy" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.JsonConvertForLong.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestNullEquals&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.TestStringSub&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestNull&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CollectionRwTest.Test_DistinctBy&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0f97ea2c_002D8b90_002D4f61_002D80f3_002Dd6f89b1324f6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test_IdList" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_IdList&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Snowflake.SnowflakeTest.Test_Id&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.SqlSugar.SqlSugarQueryDemo.Test_SelectForUpdate&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CollectionRwTest.Test_Sort&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.DeSerializer.TestJson.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StreamOpTest.Test_ToDic&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CopyOps.NewValue&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_RevertStringWithSplit&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_PrefixStringArrayWithSplit&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.Test_PrefixStringArrayWithSplit2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.SqlSugar.SqlSugarDemo.Test_Insert&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.TestStringContains&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CollectionRwTest.Test_Except&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.JsonConvertForLong.test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.JsonConvertForLong.Test&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestNull&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestNullEquals&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.SortTest.Test_Except&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	</wpf:ResourceDictionary>
