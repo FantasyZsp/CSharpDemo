@@ -118,6 +118,26 @@ namespace TestProject.BaseApi
             var list2 = new List<Girl>().DistinctBy(gg => gg.Name).ToList();
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(list2));
 
+        } 
+        
+        [Fact]
+        public void Test_DeserializeObject()
+        {
+            var girls = new List<Girl>
+            {
+                new Girl("5", "name2", 5),
+                new Girl("2", "name", 2),
+                new Girl("4", "name2", 4),
+                new Girl("3", "name2", 3),
+                new Girl("1", "name", 1),
+                new Girl("1", "name11", 2),
+                new Girl("6", "name3", 6)
+            };
+
+            var copiedList = JsonConvert.DeserializeObject<List<Girl>>(JsonConvert.SerializeObject(girls));
+
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(copiedList));
+
         }
     }
 }
