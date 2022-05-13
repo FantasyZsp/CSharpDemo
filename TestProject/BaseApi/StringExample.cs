@@ -101,6 +101,26 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void Test_GetFirstSplitted()
+        {
+            const string path = "/CQAAAA/FgAAAA/";
+            const string text = "/CAAAAA/KQAAAA/TgAAAA/gAAAAA/";
+            const string textWithUnderLine = "/CQAAAA/";
+            const string blank = " ";
+
+
+            var strings = path.Split("/");
+            var text2 = text.Split("/");
+            var textWithUnderLine2 = textWithUnderLine.Split("/");
+            _testOutputHelper.WriteLine(strings[1]);
+            _testOutputHelper.WriteLine(text2[1]);
+            _testOutputHelper.WriteLine(textWithUnderLine2[1]);
+            var substring = textWithUnderLine.Substring(1);
+            var s = substring.Substring(0, substring.IndexOf("/", StringComparison.Ordinal));
+            _testOutputHelper.WriteLine(s);
+        }
+
+        [Fact]
         public void Test_IdList()
         {
             var from = 1476475001044602885;
