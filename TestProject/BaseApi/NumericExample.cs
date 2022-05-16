@@ -44,5 +44,17 @@ namespace TestProject.BaseApi
             _testOutputHelper.WriteLine(c.ToString());
             _testOutputHelper.WriteLine(d.ToString());
         }
+
+        [Fact]
+        public void Test_Float2Double()
+        {
+            float area = 162.85f;
+            double dd = area;
+            var rightOne = double.Parse(area.ToString());
+
+            _testOutputHelper.WriteLine(area.ToString());
+            _testOutputHelper.WriteLine(dd.ToString());
+            _testOutputHelper.WriteLine(rightOne.ToString());
+        }
     }
 }
