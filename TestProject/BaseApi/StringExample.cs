@@ -56,6 +56,16 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void Test_StringStartWith()
+        {
+            var test = "abcd";
+            var longOne = "abcde";
+            var long2 = "abcd_f";
+
+            _testOutputHelper.WriteLine(long2.StartsWith(longOne).ToString());
+        }
+
+        [Fact]
         public void Test_RevertStringWithSplit()
         {
             const string path = "/CQAAAA/FgAAAA/";
