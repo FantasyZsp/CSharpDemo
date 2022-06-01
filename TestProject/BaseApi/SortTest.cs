@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xunit;
@@ -27,12 +28,11 @@ public class SortTest
         var spaceList = new List<Info> {info2, info, info3, info4};
         spaceList.Sort((left, right) =>
         {
-            
             if (left.IsPrimary.GetValueOrDefault())
             {
                 return -1;
             }
-              
+
             if (right.IsPrimary.GetValueOrDefault())
             {
                 return 1;
@@ -48,6 +48,22 @@ public class SortTest
             return priCompareTo;
         });
         _testOutputHelper.WriteLine($"{JsonConvert.SerializeObject(spaceList)}");
+        Task.Delay(100);
+    }
+
+    [Fact]
+    public void Test_GroupAndFetchMax()
+    {
+        var info = new Info(true, DateTime.Now);
+        var info2 = new Info(false, DateTime.Now.AddHours(1));
+        var info3 = new Info(false, DateTime.Now.AddHours(2));
+        var info4 = new Info(true, DateTime.Now.AddHours(3));
+
+        var spaceList = new List<Info> {info2, info, info3, info4};
+        var maxList
+            = spaceList.GroupBy(item => item.IsPrimary)
+                .Select(e => e.OrderByDescending(item => item.BindingTime).First()).OrderByDescending(item => item.BindingTime).ToList();
+        _testOutputHelper.WriteLine($"{JsonConvert.SerializeObject(maxList)}");
         Task.Delay(100);
     }
 }
