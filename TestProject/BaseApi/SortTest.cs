@@ -66,16 +66,56 @@ public class SortTest
         _testOutputHelper.WriteLine($"{JsonConvert.SerializeObject(maxList)}");
         Task.Delay(100);
     }
+
+    [Fact]
+    public void Test_SortByAssingedOrder()
+    {
+        var dic = new List<string>
+        {
+            "客厅", "客餐厅", "餐厅", "主卧", "次卧"
+        };
+        var info = new Info("1", "次卧");
+        var info2 = new Info("2", "主卧");
+        var info3 = new Info("3", "餐厅");
+        var info4 = new Info("4", "客厅");
+        var infoxx = new Info("4", "xxx");
+
+        var spaceList = new List<Info> {info2, info, info3, info4, infoxx};
+        var infos = spaceList.OrderBy((left) => dic.IndexOf(left.Text)).ToList();
+
+        _testOutputHelper.WriteLine($"{JsonConvert.SerializeObject(infos)}");
+
+        var text = "xchzww2_24cc301efc3d4e2897d817210a35faba_deco_10990/ThumbnailImages/厨房_WlTSvsqK_0111.jpg";
+
+        var jpgNode = text.Substring(text.LastIndexOf("/", StringComparison.Ordinal) + 1);
+        var roomName = jpgNode.Substring(0, jpgNode.IndexOf("_", StringComparison.Ordinal));
+        var start = jpgNode.LastIndexOf("_", StringComparison.Ordinal) + 1;
+        var end = jpgNode.LastIndexOf(".", StringComparison.Ordinal);
+
+        var number = jpgNode.Substring(start, end - start);
+        _testOutputHelper.WriteLine(number);
+
+
+        Task.Delay(100);
+    }
 }
 
 public class Info
 {
     public bool? IsPrimary { get; }
     public DateTime? BindingTime { get; }
+    public string Text { get; }
+    public string Id { get; }
 
     public Info(bool? isPrimary, DateTime? bindingTime)
     {
         IsPrimary = isPrimary;
         BindingTime = bindingTime;
+    }
+
+    public Info(string id, string text)
+    {
+        Id = id;
+        Text = text;
     }
 }

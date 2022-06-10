@@ -1,6 +1,4 @@
-﻿using System;
-using DotNetCommon.Extensions;
-using Xunit;
+﻿using Xunit;
 using Xunit.Abstractions;
 
 namespace TestProject.BaseApi
