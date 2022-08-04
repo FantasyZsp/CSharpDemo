@@ -117,9 +117,8 @@ namespace TestProject.BaseApi
 
             var list2 = new List<Girl>().DistinctBy(gg => gg.Name).ToList();
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(list2));
+        }
 
-        } 
-        
         [Fact]
         public void Test_DeserializeObject()
         {
@@ -137,7 +136,22 @@ namespace TestProject.BaseApi
             var copiedList = JsonConvert.DeserializeObject<List<Girl>>(JsonConvert.SerializeObject(girls));
 
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(copiedList));
+        }
 
+        [Fact]
+        public void Test_ToHashSet()
+        {
+            var girls = new List<string>
+            {
+                "name2",
+                "name",
+                "name2",
+                "name2",
+                "name",
+                "name11",
+                "name3"
+            };
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(girls.ToHashSet()));
         }
     }
 }

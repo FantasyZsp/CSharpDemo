@@ -68,7 +68,7 @@ public class SortTest
     }
 
     [Fact]
-    public void Test_SortByAssingedOrder()
+    public void Test_SortByAssignedOrder()
     {
         var dic = new List<string>
         {
