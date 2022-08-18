@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
+using SqlSugar.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -325,7 +328,7 @@ public class StringExample
         _testOutputHelper.WriteLine($"{Convert.ToString(16729765, 2)}");
         _testOutputHelper.WriteLine($"{Convert.ToInt32("111111110100011010100101", 2)}");
     }
-    
+
     public static uint EncodeIdWith30Bits(uint id)
     {
         Assert.True(id <= 10_7374_1823, "too bigger, must little than 10_7374_1823");
@@ -459,5 +462,32 @@ public class StringExample
         _testOutputHelper.WriteLine(codeMap.Count.ToString());
         _testOutputHelper.WriteLine(decMap.Count.ToString());
         Assert.True(codeMap.Count == decMap.Count);
+    }
+
+    [Fact]
+    public void TestCharLength()
+    {
+        const string str = "😄☺😃👆";
+        _testOutputHelper.WriteLine("length: {0}", str.Length);
+
+        var stringInfo = new StringInfo(str);
+        _testOutputHelper.WriteLine("length: {0}", stringInfo.LengthInTextElements);
+        var textElementEnumerator = StringInfo.GetTextElementEnumerator(str);
+        while (textElementEnumerator.MoveNext())
+        {
+            var textElement = textElementEnumerator.GetTextElement();
+            _testOutputHelper.WriteLine("char: {0}, length: {1}", textElement, textElement.Length);
+
+
+            for (var i = 0; i < textElement.Length; i++)
+            {
+                var thisChar = textElement[i];
+                _testOutputHelper.WriteLine("char: {0}, code: {1}", thisChar, thisChar.ToString());
+                var bytes = Encoding.Unicode.GetBytes(new[] {thisChar});
+
+
+                _testOutputHelper.WriteLine("char: {0}, code: {1}", thisChar, thisChar.ToString());
+            }
+        }
     }
 }
