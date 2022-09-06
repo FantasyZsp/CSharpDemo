@@ -38,11 +38,7 @@ public class CacheableAttribute : AbstractInterceptorAttribute
         Console.WriteLine(cacheKey);
         await next(context);
 
-        var contextReturnValue = context.ReturnValue;
-        // if (contextReturnValue is Task task)
-        // {
-        //     contextReturnValue = await contextReturnValue;
-        // }
+        var contextReturnValue =  context.IsAsync() ? await context.UnwrapAsyncReturnValue() : context.ReturnValue;
 
         Console.WriteLine(JsonConvert.SerializeObject(contextReturnValue));
         // todo cache

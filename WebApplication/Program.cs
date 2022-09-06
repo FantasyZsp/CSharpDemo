@@ -33,8 +33,8 @@ namespace WebApplication
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog()
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // 使用autofac IOC容器
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webHostBuilder =>
                 {
                     Console.WriteLine($"WebHostDefaults:{_invoked++}");
@@ -42,11 +42,7 @@ namespace WebApplication
                         // useStart内部调用了ConfigureServices，所以和 ConfigureServices 方法谁在前谁先执行。
                         // 因为本质上是在追加action。
                         .UseStartup<Startup>();
-                })
-                .ConfigureHostConfiguration(configurationBuilder => { Console.WriteLine($"HostConfiguration:{_invoked++}"); })
-                .ConfigureAppConfiguration(configurationBuilder => { Console.WriteLine($"AppConfiguration:{_invoked++}"); })
-                .ConfigureServices(collection => { Console.WriteLine($"Services:{_invoked++}"); });
-
+                });
 
         private static void ConfigLogger()
         {
