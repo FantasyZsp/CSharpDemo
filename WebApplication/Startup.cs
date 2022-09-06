@@ -1,4 +1,5 @@
 using System;
+using AspectCore.Extensions.Autofac;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace WebApplication
             Console.WriteLine("WebApplication.Startup.ConfigureServices invoke");
             services.AddMvc().AddControllersAsServices();
             services.AddSingleton<MyService>();
+            services.AddSingleton<CacheService>();
             // services.AddTransient<MyService>();
 
             // services.AddHttpClient<MyHttpClient>(client => client.BaseAddress = new Uri("http://localhost:5001/"));
@@ -46,41 +48,19 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             Console.WriteLine("WebApplication.Startup.Configure invoke");
-
-            AutofacContainer = app.ApplicationServices.GetAutofacRoot();
-            var iEchoService = AutofacContainer.ResolveNamed<IEchoService>("iEchoService");
-            // var echoService = AutofacContainer.ResolveNamed<IEchoService>("echoService");
-            // Console.WriteLine($"iEchoService is equal to echoService? {iEchoService == echoService}");
-
-
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage(); // 如果是开发环境，错误页面将呈现堆栈以及其他辅助排错的信息；如果不开启，会返回500
-            // }
-
             app.UseRouting();
             app.UseMiddleware<ObsoleteControllerLogMiddleware>();
-
-            //
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
-            // });
-            // 将路由映射到controller，没有 MapControllers 这个，是无法通过预期的url访问到controller的
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            builder.RegisterDynamicProxy();
             Console.WriteLine("WebApplication.Startup.ConfigureContainer invoke");
             builder.RegisterType<EchoService>().Named<IEchoService>("iEchoService");
             builder.RegisterType<EchoService>().Named<EchoService>("echoService");
-            // var host = new Uri("http://localhost:5000/");
-            // builder.RegisterHttpApi<IGirlWebApiClient>()
-            //     .ConfigureHttpApiConfig(configOptions => configOptions.HttpHost = host);
-            builder.RegisterModule<WebApiClientRegisterModule>();
-
             // 解析多级json配置
             var properties = Configuration.GetSection("MQConnections:Mq1").Get<MqProperties>();
             Console.WriteLine(JsonConvert.SerializeObject(properties));

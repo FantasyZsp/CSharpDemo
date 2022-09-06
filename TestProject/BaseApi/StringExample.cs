@@ -38,6 +38,15 @@ public class StringExample
         Assert.Throws<ArgumentNullException>(() => path.Contains(null).ToString());
     }
 
+    [Fact]
+    public void Test_Equals()
+    {
+        string a = null;
+        string b = null;
+        _testOutputHelper.WriteLine((a == b).ToString());
+        _testOutputHelper.WriteLine(((a ?? "test") == (b ?? "test")).ToString());
+    }
+
 
     [Fact]
     public void TestStringSub()
@@ -290,8 +299,8 @@ public class StringExample
     }
 
 
-    private const string Source = "BMP5V6TN1WCF42HU03DZ8KSQXYJR7E9GAL";
-    // const string Source = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+    // private const string Source = "BMP5V6TN1WCF42HU03DZ8KSQXYJR7E9GAL";
+    private const string Source = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
 
     public static string UIntToBase34(uint num) //num为需要转换的十进制数
@@ -445,15 +454,23 @@ public class StringExample
     [Fact]
     public void TestCodec()
     {
-        const int count = 10;
+        // const uint XorConst = 16729765;
+        // const string Source = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+        const int count = 100_0000;
         var codeMap = new Dictionary<uint, string>(count);
         var decMap = new Dictionary<string, uint>(count);
+        var digitMap = new Dictionary<string, uint>();
 
         for (uint i = 0; i <= count; i++)
         {
             var code = Codec(i);
             codeMap[i] = code;
-            _testOutputHelper.WriteLine(code);
+            if (code.All(char.IsDigit))
+            {
+                digitMap[code] = i;
+            }
+
+            // _testOutputHelper.WriteLine(code);
 
             var dec = Codec(code);
             decMap[code] = dec;
@@ -461,6 +478,7 @@ public class StringExample
 
         _testOutputHelper.WriteLine(codeMap.Count.ToString());
         _testOutputHelper.WriteLine(decMap.Count.ToString());
+        _testOutputHelper.WriteLine(digitMap.Count.ToString());
         Assert.True(codeMap.Count == decMap.Count);
     }
 

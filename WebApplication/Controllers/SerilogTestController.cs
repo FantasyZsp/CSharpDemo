@@ -5,7 +5,6 @@ using Common.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using WebApplication.Client.Girl.Rest;
 using ILogger = Serilog.ILogger;
 
 namespace WebApplication.Controllers
@@ -19,13 +18,11 @@ namespace WebApplication.Controllers
         private readonly ILogger<SerilogTestController> _logger;
         private readonly IDiagnosticContext _diagnosticContext;
 
-        public SerilogTestController(IGirlWebApiClient girlWebApiClient, ILogger<SerilogTestController> logger,
+        public SerilogTestController( ILogger<SerilogTestController> logger,
             IDiagnosticContext diagnosticContext)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _diagnosticContext = diagnosticContext ?? throw new ArgumentNullException(nameof(diagnosticContext));
-            Console.WriteLine($"SerilogTestController construct with _girlWebApiClient hashcode {girlWebApiClient.GetHashCode()}" +
-                              $" and {logger.GetHashCode()} and {_staticLogger.GetHashCode()}");
         }
 
         [HttpGet("error")]

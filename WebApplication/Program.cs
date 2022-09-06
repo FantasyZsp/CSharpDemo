@@ -33,6 +33,7 @@ namespace WebApplication
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory()) // 使用autofac IOC容器
                 .ConfigureWebHostDefaults(webHostBuilder =>
                 {
@@ -40,7 +41,6 @@ namespace WebApplication
                     webHostBuilder
                         // useStart内部调用了ConfigureServices，所以和 ConfigureServices 方法谁在前谁先执行。
                         // 因为本质上是在追加action。
-                        .UseSerilog()
                         .UseStartup<Startup>();
                 })
                 .ConfigureHostConfiguration(configurationBuilder => { Console.WriteLine($"HostConfiguration:{_invoked++}"); })
