@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AspectCore.Abstractions" Version="2.2.0"/>
+        <PackageReference Include="Spring.EL" Version="1.0.5"/>
+    </ItemGroup>
+
+</Project>

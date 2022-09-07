@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
+using Common.Cache;
 using Common.Dto;
 
 namespace WebApplication.Services;
 
 public class CacheService
 {
-    [Cacheable(prefix: "test", key: "#id")]
+    [Cacheable(key: "#id", Prefix = "test", Order = 1, Ttl = 10_000, CacheClientName = "")]
     public virtual async Task<Girl> GetById(string id)
     {
         return await Task.FromResult(new Girl {Id = id, Name = "name", Age = 18});

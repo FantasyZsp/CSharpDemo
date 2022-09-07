@@ -27,6 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Common.Cache\Common.Cache.csproj" />
         <ProjectReference Include="..\Common\Common.csproj" />
     </ItemGroup>
 
