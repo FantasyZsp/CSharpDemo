@@ -3,17 +3,17 @@ using Common.Supports;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Common.Cache;
+namespace Common.Cache.Annotations;
 
 [AttributeUsage(AttributeTargets.Method)]
-public class CacheableAttribute : AbstractInterceptorAttribute
+public class CachePutAttribute : AbstractInterceptorAttribute
 {
     private readonly string _key;
     public string Prefix { get; set; }
     public string CacheClientName { get; set; } // 如何在这里实现用name依赖查找到服务
     public long Ttl { get; set; } // ms
 
-    public CacheableAttribute(string key)
+    public CachePutAttribute(string key)
     {
         base.Order = -1; // 优先于事务注解生效
         _key = key;
@@ -40,10 +40,10 @@ public class CacheableAttribute : AbstractInterceptorAttribute
             throw;
         }
 
-        var contextReturnValue = await ExtractReturnValue(context);
+        var contextReturnValue = await context.ExtractReturnValue();
 
 
-        var commonWritableCache = GetWritableCache(context);
+        var commonWritableCache = context.GetCacheClient(CacheClientName);
         if (commonWritableCache == null)
         {
             logger.LogWarning("no cache client for {Name}", CacheClientName ?? "NoAssignedName");
@@ -61,20 +61,6 @@ public class CacheableAttribute : AbstractInterceptorAttribute
         }
     }
 
-    private ICommonWritableCache GetWritableCache(AspectContext context)
-    {
-        var commonWritableCaches = context.ServiceProvider.GetServices<ICommonWritableCache>();
-        var commonWritableCache = commonWritableCaches
-            .OrderBy(cache => cache.MyOrder())
-            .FirstOrDefault(cache => string.IsNullOrEmpty(CacheClientName) || cache.MyCacheName() == CacheClientName);
-        return commonWritableCache;
-    }
-
-    private static async Task<object> ExtractReturnValue(AspectContext context)
-    {
-        var contextReturnValue = context.IsAsync() ? await context.UnwrapAsyncReturnValue() : context.ReturnValue;
-        return contextReturnValue;
-    }
 
     private string ExtractDynamicKey(AspectContext context)
     {
