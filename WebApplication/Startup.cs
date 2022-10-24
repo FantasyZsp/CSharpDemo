@@ -2,6 +2,8 @@ using System;
 using AspectCore.Extensions.Autofac;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Features.AttributeFilters;
+using Common.Cache;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -64,6 +66,12 @@ namespace WebApplication
             // 解析多级json配置
             var properties = Configuration.GetSection("MQConnections:Mq1").Get<MqProperties>();
             Console.WriteLine(JsonConvert.SerializeObject(properties));
+            var cacheProperties = Configuration.GetSection("CacheProperties").Get<CacheProperties>();
+            builder.RegisterInstance(cacheProperties).SingleInstance();
+
+            builder.RegisterAssemblyTypes(typeof(Cache).Assembly).InstancePerLifetimeScope().WithAttributeFiltering().PropertiesAutowired()
+                .AsImplementedInterfaces()
+                .AsSelf();
         }
     }
 }

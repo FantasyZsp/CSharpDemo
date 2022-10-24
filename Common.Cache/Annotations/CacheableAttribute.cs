@@ -8,8 +8,11 @@ using Microsoft.Extensions.Logging;
 namespace Common.Cache.Annotations;
 
 /// <summary>
-/// 鸣谢：https://blog.csdn.net/qq_18721495/article/details/117839018，提供了处理异步方法返回值的方式。
+/// 缓存kv。如果kv已存在，直接返回v，不需要执行目标方法；如果不存在，执行目标方法后，将方法返回值作为value存入缓存中。
 /// </summary>
+/// <remarks>
+/// 鸣谢：https://blog.csdn.net/qq_18721495/article/details/117839018，提供了处理异步方法返回值的方式。
+/// </remarks>
 [AttributeUsage(AttributeTargets.Method)]
 public class CacheableAttribute : AbstractInterceptorAttribute
 {
@@ -28,7 +31,7 @@ public class CacheableAttribute : AbstractInterceptorAttribute
 
     public override async Task Invoke(AspectContext context, AspectDelegate next)
     {
-        var logger = context.ServiceProvider.GetRequiredService<ILogger>();
+        var logger = context.ServiceProvider.GetRequiredService<ILogger<CacheableAttribute>>();
         // 判定要不要执行缓存逻辑
         var invokeCache = NeedInvokeCache(context, out var readableCache);
 
@@ -39,9 +42,9 @@ public class CacheableAttribute : AbstractInterceptorAttribute
 
             var returnType = context.GetReturnType();
 
-            var method = readableCache.GetType().GetMethod("Get")!.MakeGenericMethod(returnType); // TODO 可以缓存这个结果吗？
+            var method = readableCache.GetType().GetMethod("Get");
 
-            var task = (Task<object>) method.Invoke(readableCache, new object[] {cacheKey});
+            var task = (Task<object>) method!.Invoke(readableCache, new object[] {cacheKey});
 
             if (task != null)
             {
