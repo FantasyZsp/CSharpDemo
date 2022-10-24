@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Common.Cache;
 using Common.Cache.Annotations;
 using Common.Dto;
 
@@ -11,5 +10,18 @@ public class CacheService
     public virtual async Task<Girl> GetById(string id)
     {
         return await Task.FromResult(new Girl {Id = id, Name = "name", Age = 18});
+    }
+
+    [CachePut(key: "#id", Prefix = "test", Order = 1, Ttl = 10_000)]
+    public virtual async Task<Girl> Put(string id)
+    {
+        return await Task.FromResult(new Girl {Id = id, Name = "putData", Age = 18});
+    }
+
+
+    [CacheEvict(key: "#id", Prefix = "test", Order = 1)]
+    public virtual async Task<Girl> Remove(string id)
+    {
+        return await Task.FromResult(new Girl {Id = id, Name = "removeData", Age = 18});
     }
 }

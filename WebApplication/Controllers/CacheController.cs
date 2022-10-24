@@ -21,4 +21,16 @@ public class CacheController : Controller
     {
         return await _cacheService.GetById(id);
     }
+
+    [HttpPut]
+    public async Task<Girl> Put(string id)
+    {
+        return await _cacheService.Put(id);
+    }
+
+    [HttpDelete]
+    public async Task<Girl> Remove(string id)
+    {
+        return await _cacheService.Remove(id);
+    }
 }

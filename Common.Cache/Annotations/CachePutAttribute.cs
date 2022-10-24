@@ -23,11 +23,7 @@ public class CachePutAttribute : AbstractInterceptorAttribute
 
     public override async Task Invoke(AspectContext context, AspectDelegate next)
     {
-        var logger = context.ServiceProvider.GetRequiredService<ILogger>();
-
-        var cacheKey = ExtractDynamicKey(context);
-        logger.LogInformation("get key {Key}", cacheKey);
-
+        var logger = context.ServiceProvider.GetRequiredService<ILogger<CachePutAttribute>>();
         try
         {
             await next(context);
@@ -40,8 +36,17 @@ public class CachePutAttribute : AbstractInterceptorAttribute
             throw;
         }
 
-        var contextReturnValue = await context.ExtractReturnValue();
+        var cacheProperties = context.ServiceProvider.GetRequiredService<CacheProperties>();
+        if (!cacheProperties.Enable)
+        {
+            logger.LogWarning("cache feature has been disable");
+            return;
+        }
 
+        var cacheKey = context.ExtractDynamicKey(_key, Prefix);
+        logger.LogInformation("get key {Key} for put", cacheKey);
+
+        var contextReturnValue = await context.ExtractReturnValue();
 
         var commonWritableCache = context.GetCacheClient(CacheClientName);
         if (commonWritableCache == null)
@@ -59,13 +64,5 @@ public class CachePutAttribute : AbstractInterceptorAttribute
         {
             logger.LogWarning("cache ex for {CacheKey}. ex {ExMsg}", cacheKey, ignore);
         }
-    }
-
-
-    private string ExtractDynamicKey(AspectContext context)
-    {
-        var key = SpelExpressionParserUtils.GenerateKeyByEl(context, _key);
-
-        return string.IsNullOrEmpty(Prefix) ? key : Prefix + ":" + key;
     }
 }

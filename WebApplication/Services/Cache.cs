@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Cache;
 
@@ -8,7 +7,7 @@ namespace WebApplication.Services;
 public class Cache : ICache
 {
     /// <summary>
-    /// 至少是个lru/fru，避免OOM
+    /// 需要支持淘汰策略，避免OOM
     /// </summary>
     private static readonly ConcurrentDictionary<string, object> CacheHolder = new();
 
@@ -24,10 +23,16 @@ public class Cache : ICache
         return CacheHolder.TryRemove(key, out _);
     }
 
-    public async Task<object> Get(string key)
+    // public async Task<object> Get(string key)
+    // {
+    //     var hasValue = CacheHolder.TryGetValue(key, out var oldValue);
+    //     return hasValue ? oldValue : null;
+    // }
+
+    public async Task<TV> Get<TV>(string key)
     {
         var hasValue = CacheHolder.TryGetValue(key, out var oldValue);
-        return hasValue ? oldValue : null;
+        return hasValue ? (TV) oldValue : default;
     }
 
     public string MyCacheName()

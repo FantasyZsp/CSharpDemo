@@ -35,16 +35,15 @@ public class CacheableAttribute : AbstractInterceptorAttribute
         // 判定要不要执行缓存逻辑
         var invokeCache = NeedInvokeCache(context, out var readableCache);
 
-        var cacheKey = ExtractDynamicKey(context);
+        var cacheKey = context.ExtractDynamicKey(_key, Prefix);
         if (invokeCache)
         {
-            logger.LogInformation("get key {Key}", cacheKey);
-
+            logger.LogInformation("get key {Key} for cacheable", cacheKey);
             var returnType = context.GetReturnType();
 
-            var method = readableCache.GetType().GetMethod("Get");
+            var method = readableCache.GetType().GetMethod("Get")!.MakeGenericMethod(returnType);
 
-            var task = (Task<object>) method!.Invoke(readableCache, new object[] {cacheKey});
+            dynamic task = method!.Invoke(readableCache, new object[] {cacheKey});
 
             if (task != null)
             {
@@ -118,12 +117,5 @@ public class CacheableAttribute : AbstractInterceptorAttribute
         }
 
         return readableCache != null;
-    }
-
-    private string ExtractDynamicKey(AspectContext context)
-    {
-        var key = SpelExpressionParserUtils.GenerateKeyByEl(context, _key);
-
-        return string.IsNullOrEmpty(Prefix) ? key : Prefix + ":" + key;
     }
 }
