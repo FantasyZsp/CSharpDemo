@@ -26,6 +26,15 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void Test_ArrayAppend()
+        {
+            var strings = new string[] {"a", "b", "c"};
+            strings.Append("d");
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject( strings.Append("d")));
+            _testOutputHelper.WriteLine(JsonConvert.SerializeObject(strings));
+        }
+
+        [Fact]
         public void Test_Except()
         {
             var set = new HashSet<string>

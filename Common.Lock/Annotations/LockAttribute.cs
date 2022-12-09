@@ -1,5 +1,4 @@
 ﻿using AspectCore.DynamicProxy;
-using AspectCore.DynamicProxy.Parameters;
 using Autofac.Core;
 using Common.Supports;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,15 +12,16 @@ public class LockAttribute : AbstractInterceptorAttribute
     public string Prefix { get; set; }
     private readonly string _key;
     public string LockClientName { get; set; }
-    public TimeSpan WaitTime { get; set; } // 等待获取锁的时间,30s
-    public TimeSpan LeaseTime { get; set; } // 自动释放锁的时间，默认-1s代表不自动释放
+    public TimeSpan WaitTime { get; } // 等待获取锁的时间。默认-1s代表永远阻塞等待
+    public TimeSpan LeaseTime { get; } // 自动释放锁的时间，默认-1s代表不自动释放
 
+    public override bool AllowMultiple => true;
 
     public LockAttribute(string key)
     {
         base.Order = -1; // 优先于事务注解生效
         _key = key;
-        WaitTime = TimeSpan.FromSeconds(30);
+        WaitTime = TimeSpan.FromSeconds(-1);
         LeaseTime = TimeSpan.FromSeconds(-1);
     }
 
@@ -30,14 +30,16 @@ public class LockAttribute : AbstractInterceptorAttribute
     {
         var logger = context.ServiceProvider.GetRequiredService<ILogger<LockAttribute>>();
         // 判定要不要执行缓存逻辑
-        var invokeLock = NeedInvokeLock(context, out var readableCache);
+        var invokeLock = NeedInvokeLock(context, out var lockClient);
+        var lockKey = context.ExtractDynamicKey(_key, Prefix);
 
-        var cacheKey = context.ExtractDynamicKey(_key, Prefix);
+        var waitForeverWhenHeldByOtherThread = WaitTime == TimeSpan.FromSeconds(-1);
+
+
         if (invokeLock)
         {
-            logger.LogInformation("get key {Key} for lock", cacheKey);
-
-            logger.LogDebug("cacheMiss for {CacheKey}", cacheKey);
+            logger.LogInformation("get key {Key} for lock", lockKey);
+            await DoLock(waitForeverWhenHeldByOtherThread, lockClient, logger, lockKey);
         }
 
 
@@ -50,6 +52,57 @@ public class LockAttribute : AbstractInterceptorAttribute
         {
             logger.LogWarning("business ex, so no cache for this request.ex {ExMsg}", e);
             throw;
+        }
+        finally
+        {
+            // todo unlock if lock success
+        }
+    }
+
+    private async Task DoLock(bool waitForeverWhenHeldByOtherThread, ILockClient lockClient, ILogger<LockAttribute> logger, string lockKey)
+    {
+        var lockResultExpected = true;
+        Exception throwable = null;
+        // todo lock
+        if (waitForeverWhenHeldByOtherThread)
+        {
+            try
+            {
+                await lockClient.Lock(WaitTime);
+                logger.LogDebug("lock success: {LockName}", lockKey);
+            }
+            catch (Exception ex)
+            {
+                lockResultExpected = false;
+                throwable = ex;
+                logger.LogWarning("lock failed unexpected, lockName: {}, error reason:{}", lockKey, ex.Message);
+            }
+        }
+        else
+        {
+            // var lockSuccess = true;
+            // try
+            // {
+            //     lockSuccess =  lock.tryLock(waitTime, leaseTime, timeUnit);
+            // }
+            // catch (Throwable ex)
+            // {
+            //     lockResultExpected = false;
+            //     throwable = ex;
+            //     log.error("try lock failed unexpected, lockName: {}, error reason:{}", lockKey, ex.getMessage());
+            // }
+            //
+            // if (!lockSuccess)
+            // {
+            //     Constructor < ?> constructor = exceptionClass.getConstructor(String.class);
+            //     RuntimeException exception = (RuntimeException) constructor.newInstance(exceptionMessage);
+            //     log.error("try lock failed: {}", lockKey);
+            //     throw exception;
+            // }
+            // else
+            // {
+            //     log.debug("try lock success: {}", lockKey);
+            // }
         }
     }
 
@@ -65,26 +118,21 @@ public class LockAttribute : AbstractInterceptorAttribute
     private bool NeedInvokeLock(AspectContext context, out ILockClient lockClient)
     {
         lockClient = null;
-        var methodReturnType = context.GetReturnParameter().Type;
-        var isVoidReturn = methodReturnType == typeof(void) || methodReturnType == typeof(Task) || methodReturnType == typeof(ValueTask);
-
-        if (isVoidReturn)
+        lockClient = GetLockClient(context, LockClientName);
+        if (lockClient == null)
         {
-            return false;
+            throw new DependencyResolutionException($"no lock client for {LockClientName ?? "NoAssignedName"}");
         }
 
-        // var cacheProperties = context.ServiceProvider.GetRequiredService<CacheProperties>();
-        // if (!cacheProperties.Enable)
-        // {
-        //     return false;
-        // }
-
-        // lockClient = context.GetCacheClient(LockClientName);
-        // if (lockClient == null)
-        // {
-        //     throw new DependencyResolutionException($"no cache client for {LockClientName ?? "NoAssignedName"}");
-        // }
-
         return lockClient != null;
+    }
+
+    private static ILockClient GetLockClient(AspectContext context, string lockClientName)
+    {
+        var lockClients = context.ServiceProvider.GetServices<ILockClient>();
+        var lockClient = lockClients
+            .OrderBy(item => item.Order())
+            .FirstOrDefault(item => string.IsNullOrEmpty(lockClientName) || item.Name() == lockClientName);
+        return lockClient;
     }
 }

@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="AspectCore.Abstractions" Version="2.2.0" />
         <PackageReference Include="AspectCore.Extensions.Autofac" Version="2.2.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.2" />
         <PackageReference Include="Spring.EL" Version="1.0.5" />
     </ItemGroup>

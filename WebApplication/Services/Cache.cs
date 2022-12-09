@@ -35,12 +35,12 @@ public class Cache : ICache
         return hasValue ? (TV) oldValue : default;
     }
 
-    public string MyCacheName()
+    public string Name()
     {
         return "defaultSimpleCache";
     }
 
-    public int MyOrder()
+    public int Order()
     {
         return 1;
     }

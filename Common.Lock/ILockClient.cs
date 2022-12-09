@@ -1,6 +1,8 @@
+using Common.Supports;
+
 namespace Common.Lock;
 
-public interface ILockClient
+public interface ILockClient : IOrdered, INamed
 {
-    
+    Task Lock(TimeSpan waitTime);
 }
