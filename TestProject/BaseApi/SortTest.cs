@@ -98,12 +98,40 @@ public class SortTest
 
         Task.Delay(100);
     }
+
+    [Fact]
+    public void Test_SortByAssignedOrderAndTime()
+    {
+        var dic = new List<string>
+        {
+            "客厅", "客餐厅", "餐厅", "主卧", "次卧"
+        };
+        var info = new Info("1", "次卧") {BindingTime = DateTime.Now};
+        var info2 = new Info("2", "主卧") {BindingTime = DateTime.Now.AddHours(1)};
+        var info3 = new Info("3", "餐厅") {BindingTime = DateTime.Now.AddHours(2)};
+        var info4 = new Info("4", "客厅") {BindingTime = DateTime.Now.AddHours(3)};
+        var info5 = new Info("5", "客餐厅") {BindingTime = DateTime.Now.AddHours(4)};
+        var info6 = new Info("6", "主卧") {BindingTime = DateTime.Now.AddHours(10)};
+        var info7 = new Info("7", "客餐厅") {BindingTime = DateTime.Now.AddHours(8)};
+
+        var spaceList = new List<Info> {info2, info, info3, info4, info5, info6, info7};
+        spaceList.Sort((left, right) =>
+        {
+            var leftOrder = dic.IndexOf(left.Text);
+            var rightOrder = dic.IndexOf(right.Text);
+            var compareTo = leftOrder.CompareTo(rightOrder);
+            return compareTo == 0 ? right.BindingTime.GetValueOrDefault().CompareTo(left.BindingTime.GetValueOrDefault()) : compareTo;
+        });
+
+        _testOutputHelper.WriteLine(JsonConvert.SerializeObject(spaceList, new JsonSerializerSettings() {NullValueHandling = NullValueHandling.Ignore, Formatting = Formatting.Indented}));
+        Task.Delay(100);
+    }
 }
 
 public class Info
 {
     public bool? IsPrimary { get; }
-    public DateTime? BindingTime { get; }
+    public DateTime? BindingTime { get; set; }
     public string Text { get; }
     public string Id { get; }
 
@@ -117,5 +145,11 @@ public class Info
     {
         Id = id;
         Text = text;
+    }
+
+    public Info(string text, DateTime? bindingTime)
+    {
+        Text = text;
+        BindingTime = bindingTime;
     }
 }
