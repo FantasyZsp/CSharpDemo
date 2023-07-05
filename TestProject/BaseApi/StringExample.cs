@@ -79,7 +79,7 @@ public class StringExample
     [Fact]
     public void TestStringSubIdSub0()
     {
-        var layout = "1室0厅11厨";
+        var layout = "2室1厅1卫1厨 ";
         var formattedLayout = Format(layout);
         formattedLayout = FormatWithoutZeroTing(layout);
         _testOutputHelper.WriteLine(formattedLayout);

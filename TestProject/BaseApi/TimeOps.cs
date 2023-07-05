@@ -25,6 +25,12 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void Test_DateTime_Date()
+        {
+            _testOutputHelper.WriteLine(DateTime.Now.Date.ToString("yyyyMMdd"));
+        }
+
+        [Fact]
         public void Test_DateTime_Seconds()
         {
             var dateTime = DateTime.UtcNow;

@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Common.Dto;
 using Newtonsoft.Json;
 using Xunit;
@@ -33,10 +34,26 @@ namespace TestProject.BaseApi
             var defaultValue = new PocoDefaultValue { };
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(defaultValue));
         }
-    }
 
-    public class PocoDefaultValue
-    {
-        public string Test { get; set; } = "test";
+        [Fact]
+        public void RefInnerChanged()
+        {
+            var demo = new PocoDefaultValue();
+            Modify(demo);
+            _testOutputHelper.WriteLine(demo.ToString());
+        }
+
+        private void Modify(PocoDefaultValue demo)
+        {
+            demo = new PocoDefaultValue()
+            {
+                Test = "inner"
+            };
+        }
+
+        public class PocoDefaultValue
+        {
+            public string Test { get; set; } = "test";
+        }
     }
 }

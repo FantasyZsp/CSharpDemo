@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Xunit;
@@ -28,6 +29,13 @@ namespace TestProject.DeSerializer
             JsonConvert.DefaultSettings = () => setting;
 
             _testOutputHelper.WriteLine(JsonConvert.SerializeObject(jObject, setting));
+        }
+
+
+        [Fact]
+        public void TestJsonNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => { JsonConvert.DeserializeObject(null); });
         }
     }
 }
