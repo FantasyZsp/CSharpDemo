@@ -3,31 +3,13 @@
   &lt;Assembly Path="/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.0/System.Private.CoreLib.dll" /&gt;
   &lt;Assembly Path="/Users/zhaosp/.nuget/packages/spring.el/1.0.5/lib/netstandard2.0/Spring.EL.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2178fd68_002D899a_002D44e0_002D81f5_002D64a05e5c0d9f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test_ArrayAppend" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e707acf_002D6c79_002D40a7_002D8bec_002D9bc2dad4008b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BitAndTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CollectionRwTest.Test_ArrayAppend&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.SortTest.Test_SortByAssignedOrderAndTime&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Test_UIntMax&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.TaskDemo.Test&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.TestStringSubIdSub0&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.ConcurrentDemo.Test&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.BitExample.BitAndTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.ClassExample.ParentTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringTemplateExample.ReplaceTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d0828e5f_002D555b_002D4b4a_002D9c93_002D86e718fef16b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.ConcurrentDemo.Test&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.ConcurrentDemo.TestCalculate&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f7fe1480_002D47de_002D4723_002D806a_002D5d4b73a73b84/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestCalculate" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.ConcurrentDemo.TestCalculate&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.TimeOps.Test_DateTime_Date&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Test_compareDoubleAndInt&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.CopyOps.RefInnerChanged&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.DeSerializer.TestJson.TestJsonNull&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Test_Float2Double&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Test_FloatCalculate&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Test_FloatCalculate2&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	
+	</wpf:ResourceDictionary>
