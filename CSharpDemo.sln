@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Supports", "Common.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Lock", "Common.Lock\Common.Lock.csproj", "{FA671869-D72B-4139-AAF3-730172E7490B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryToOverrideCommonFile", "TryToOverrideCommonFile\TryToOverrideCommonFile.csproj", "{72D5A045-C3C3-4387-95E0-6E21A98858F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{FA671869-D72B-4139-AAF3-730172E7490B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA671869-D72B-4139-AAF3-730172E7490B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA671869-D72B-4139-AAF3-730172E7490B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D5A045-C3C3-4387-95E0-6E21A98858F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D5A045-C3C3-4387-95E0-6E21A98858F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D5A045-C3C3-4387-95E0-6E21A98858F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D5A045-C3C3-4387-95E0-6E21A98858F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

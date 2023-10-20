@@ -37,5 +37,22 @@ namespace TestProject.DeSerializer
         {
             Assert.Throws<ArgumentNullException>(() => { JsonConvert.DeserializeObject(null); });
         }
+
+        [Fact]
+        public void TestJObject()
+        {
+            var jsonStr = JsonConvert.SerializeObject(new
+            {
+                floorPlanPostEditor =
+                    "https://webresource.123kanfang.com/livedeco-dev/hub/index.html?token={token}&hid={hid}&domain=//{domain}/",
+                PostEditorUrl = "test",
+            });
+            var json = JsonConvert.DeserializeObject<JObject>(jsonStr);
+
+            var jToken = json["floorPlanPostEditor"].ToString()
+                ?.Replace("&token={token}", "")
+                .Replace("?token={token}&", "?");
+            _testOutputHelper.WriteLine(jToken);
+        }
     }
 }

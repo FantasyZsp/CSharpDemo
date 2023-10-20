@@ -2,12 +2,45 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.0/System.Private.CoreLib.dll" /&gt;
   &lt;Assembly Path="/Users/zhaosp/.nuget/packages/spring.el/1.0.5/lib/netstandard2.0/Spring.EL.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/easycaching.core/1.9.0/lib/net6.0/EasyCaching.Core.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/microsoft.international.converters.pinyinconverter/1.0.0/lib/ChnCharInfo.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/toolgood.words.pinyin/3.1.0/lib/netstandard2.1/ToolGood.Words.Pinyin.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/dotnetcommon.pinyin/3.0.0/lib/net6.0/DotNetCommon.PinYin.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/toolgood.words/3.1.0/lib/netstandard2.1/ToolGood.Words.dll" /&gt;
+  &lt;Assembly Path="/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.0/netstandard.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e707acf_002D6c79_002D40a7_002D8bec_002D9bc2dad4008b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BitAndTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1e707acf_002D6c79_002D40a7_002D8bec_002D9bc2dad4008b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BitAndTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.BitExample.BitAndTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.ClassExample.ParentTest&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringTemplateExample.ReplaceTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.Test&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.MultiTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.Pinyin4NetTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.WordsHelperMultiTest2&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.TestNumberToChinese&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.TestMain&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.WordsHelperNotGoodCaseTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.WordsHelperTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Resources.LoadResourcesTest.TestLoad&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Resources.LoadResourcesTest.TestLoadWhichFile&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::Common.Annotations.AttributeInheritedDemo.TestDemo&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Annotations.AttributeInheritedDemo.TestDemo&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9806501f_002D18f3_002D441d_002D8cfd_002D5dac4442b6b6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestLoadWhichFile" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Resources.LoadResourcesTest.TestLoadWhichFile&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Resources.LoadResourcesTest.TestLoad&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Annotations.AttributeInheritedDemo.TestDemo&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.TestBlank&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.PinYin.PinYinDemo.WordsHelperMultiTest2&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.TestDecimal&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.DeSerializer.TestJson.TestJObject&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.StringExample.TestStringMatch2&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.Truncate&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.NumericExample.DivideZero&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.BaseApi.Tasks.ConcurrentDemo.TestCas&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	

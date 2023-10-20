@@ -32,7 +32,6 @@ public class ConcurrentDemo
         await Task.Delay(10000);
         Task.WaitAll(tasks.ToArray());
         _testOutputHelper.WriteLine($"finish2");
-
     }
 
 
@@ -51,6 +50,16 @@ public class ConcurrentDemo
         _testOutputHelper.WriteLine("main sleep");
 
         Thread.Sleep(3000);
+    }
+
+
+    [Fact]
+    public async Task TestCas()
+    {
+        int a = 1;
+        var result = Interlocked.CompareExchange(ref a, 2, 1).ToString();
+        _testOutputHelper.WriteLine(result);
+        _testOutputHelper.WriteLine(a.ToString());
     }
 
     public async Task Method1()

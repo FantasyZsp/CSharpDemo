@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
+using DotNetCommon.Extensions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -24,6 +26,34 @@ namespace TestProject.BaseApi
             _testOutputHelper.WriteLine((b == 0).ToString()); // false
             _testOutputHelper.WriteLine((b != 0).ToString());
             _testOutputHelper.WriteLine((b.GetValueOrDefault() != 0).ToString());
+        }
+
+        [Fact]
+        public void TestDecimal()
+        {
+            float? a = null;
+            var convert = ToDecimal(a, 2);
+            _testOutputHelper.WriteLine(convert.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Fact]
+        public void Truncate()
+        {
+            var d = 1231111112002 / 1024.0 / 1024 * 100 / 100;
+            _testOutputHelper.WriteLine(Math.Round(d, 2).ToString());
+        }
+
+        [Fact]
+        public void DivideZero()
+        {
+            var number = 11.2;
+            var d = (int) number % 10;
+            _testOutputHelper.WriteLine(d.ToString(CultureInfo.InvariantCulture));
+        }
+
+        public static decimal ToDecimal(float? fl, int decimals = 2)
+        {
+            return decimal.Round(Convert.ToDecimal(fl), decimals);
         }
 
         [Fact]

@@ -11,10 +11,15 @@
     <ItemGroup>
         <PackageReference Include="FreeSql" Version="2.6.100" />
         <PackageReference Include="FreeSql.Provider.MySql" Version="2.6.100" />
+        <PackageReference Include="hyjiacan.pinyin4net" Version="4.1.1" />
+        <PackageReference Include="Microsoft.International.Converters.PinYinConverter" Version="1.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
         <PackageReference Include="Snowflake.Core" Version="2.0.0" />
         <PackageReference Include="Spring.EL" Version="1.0.5" />
         <PackageReference Include="SqlSugarCore" Version="5.0.4.2" />
+        <PackageReference Include="ToolGood.Words" Version="3.1.0" />
+        <PackageReference Include="ToolGood.Words.FirstPinyin" Version="3.1.0" />
+        <PackageReference Include="ToolGood.Words.Pinyin" Version="3.1.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -27,7 +32,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
+        <ProjectReference Include="..\Common\Common.csproj">
+<!--            <Aliases>Common</Aliases>-->
+        </ProjectReference>
+<!--        <ProjectReference Include="..\TryToOverrideCommonFile\TryToOverrideCommonFile.csproj">-->
+<!--            <Aliases>Common2</Aliases>-->
+<!--        </ProjectReference>-->
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Resources\test.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

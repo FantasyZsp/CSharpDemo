@@ -31,6 +31,21 @@ public class StringExample
         _testOutputHelper.WriteLine(longText.StartsWith(textWithUnderLine).ToString());
     }
 
+
+    [Fact]
+    public void TestStringMatch2()
+    {
+        var path = "abc";
+        if (path is not ("abc" or "ccc" or "eee"))
+        {
+            _testOutputHelper.WriteLine("hits");
+        }
+        else
+        {
+            _testOutputHelper.WriteLine("miss");
+        }
+    }
+
     [Fact]
     public void TestStringContains()
     {
