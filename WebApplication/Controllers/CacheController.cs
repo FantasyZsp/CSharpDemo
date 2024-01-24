@@ -19,6 +19,8 @@ public class CacheController : Controller
     [HttpGet]
     public async Task<Girl> GetById(string id)
     {
+        
+        
         return await _cacheService.GetById(id);
     }
 

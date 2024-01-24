@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using DotNetCommon.Extensions;
 using Newtonsoft.Json;
 using SqlSugar.Extensions;
 using Xunit;
@@ -255,6 +256,20 @@ public class StringExample
 
         _testOutputHelper.WriteLine(test);
         _testOutputHelper.WriteLine(test2);
+    }
+
+    [Fact]
+    public void Test_StringList2()
+    {
+        const string test =
+            "托儿所,幼儿园,幼稚园,菜店,菜场,副食,百货,小学,中学,大学,学生,医院,诊所,银行,家具,水果,超市,公交,公司,饭店,市场,卖场,饮食,邮电,储蓄,居委会,电影院,文化馆,副食,书店,药房,饭店,派出所,图书馆,婚姻,宿舍,直营店,补习班,校区,办公室,网吧,五金,电器,商行,经营部,驾校,产业园,鲜果,油漆,加油站,购物,批发,工程,警察,建筑,蔬菜,肉,日用,职业,经理,研究生,消防,税务,党群,监测,充电站,林场,出租,教学,仪器,草坪,党校,剧院,创新,机场,火车,动车,酒楼,玩具,项目,高新技术,工业,天然气,专卖店,机动车,交易,农贸,生鲜,海鲜,禽,火锅,科技园";
+
+        var strings = test.Split(',');
+        _testOutputHelper.WriteLine(strings.ToJson());
+        _testOutputHelper.WriteLine(strings.Length.ToString());
+        _testOutputHelper.WriteLine(strings.Distinct().Count().ToString());
+        var groupBy = strings.ToList().GroupBy(ss => ss).Where((ss) => ss.Count() > 1).Select((ss, count) => ss.Key).ToList();
+        _testOutputHelper.WriteLine(groupBy.ToJson());
     }
 
     private void ReverseStringWithSplit(string path)
