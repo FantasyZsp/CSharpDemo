@@ -25,6 +25,14 @@ namespace TestProject.BaseApi
         }
 
         [Fact]
+        public void Test_DateTime_AddHours()
+        {
+            var value = Math.Pow(3, 17);
+            var addHours = DateTime.UtcNow.AddHours(value);
+            _testOutputHelper.WriteLine(addHours.ToString(CultureInfo.InvariantCulture));
+        }
+
+        [Fact]
         public void Test_DateTime_Date()
         {
             _testOutputHelper.WriteLine(DateTime.Now.Date.ToString("yyyyMMdd"));

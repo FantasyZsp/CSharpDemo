@@ -10,12 +10,12 @@ namespace TestProject.Locks;
 /// </summary>
 public class TinyLock : IDisposable, IAsyncDisposable
 {
-    public static readonly RefCounterPool<string, SemaphoreSlim> LockPool = new();
+    public static readonly RefCounterPool<object, SemaphoreSlim> LockPool = new();
 
-    private readonly string _lockKey;
+    private readonly object _lockKey;
     private readonly SemaphoreSlim _semaphore;
 
-    public TinyLock(string lockKey)
+    public TinyLock(object lockKey)
     {
         _lockKey = lockKey;
         _semaphore = InitLock();

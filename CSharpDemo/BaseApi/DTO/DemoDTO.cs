@@ -1,7 +1,6 @@
-﻿namespace CSharpDemo.BaseApi.DTO
+﻿namespace CSharpDemo.BaseApi.DTO;
+
+public class DemoDTO
 {
-    public class DemoDTO
-    {
-        public uint Id { get; set; }
-    }
+    public uint Id { get; set; }
 }

@@ -64,7 +64,7 @@ public class LockDemo
                 await localLock.LockAsync();
                 count++;
                 await Task.Delay(1);
-                await localLock.UnLockAsync();
+                // await localLock.UnLockAsync();
             }));
         }
 
@@ -72,6 +72,19 @@ public class LockDemo
         await Task.CompletedTask;
         _testOutputHelper.WriteLine("count " + count.ToString());
         _testOutputHelper.WriteLine("MemoryLockPool " + TinyLock.LockPool.Count());
+    }
+
+    [Fact]
+    public async Task TestInitLock()
+    {
+        for (var i = 0; i < 3000; i++)
+        {
+            var tinyLock = new TinyLock("lock-" + $"{i}");
+            tinyLock.Lock();
+        }
+
+        _testOutputHelper.WriteLine("over");
+        await Task.CompletedTask;
     }
 
     [Fact]

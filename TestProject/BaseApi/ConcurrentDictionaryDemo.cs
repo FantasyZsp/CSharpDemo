@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using DotNetCommon.Extensions;
 using TestProject.BaseApi.Models;
@@ -70,5 +71,25 @@ public class ConcurrentDictionaryDemo
 
         var tryGetValue = concurrentDictionary.TryGetValue("zzz1", out var xxx);
         _testOutputHelper.WriteLine(tryGetValue.ToString());
+    }
+
+    [Fact]
+    public void TestSetSameKey()
+    {
+        var concurrentDictionary = new ConcurrentDictionary<string, Kid>();
+        concurrentDictionary.TryAdd("1", new Kid()
+        {
+            Name = "newName",
+            Age = 1,
+            Sex = SexEnum.MM
+        });
+        concurrentDictionary.TryAdd("1", Kid.DefaultGGKid);
+        concurrentDictionary.TryAdd("2", Kid.DefaultGGKid);
+        Assert.Throws<ArgumentException>(() => ((IDictionary) concurrentDictionary).Add("1", Kid.DefaultGGKid));
+
+
+        concurrentDictionary["1"] = Kid.DefaultGGKid;
+
+        _testOutputHelper.WriteLine(concurrentDictionary.ToJson());
     }
 }

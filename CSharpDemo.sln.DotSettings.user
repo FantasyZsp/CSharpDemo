@@ -9,19 +9,24 @@
   &lt;Assembly Path="/Users/zhaosp/.nuget/packages/toolgood.words/3.1.0/lib/netstandard2.1/ToolGood.Words.dll" /&gt;
   &lt;Assembly Path="/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.0/netstandard.dll" /&gt;
   &lt;Assembly Path="/Users/zhaosp/projects/github/CSharpDemo/TestProject/bin/Debug/net6.0/IP2Region.Net.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/polly.core/8.2.1/lib/net6.0/Polly.Core.dll" /&gt;
+  &lt;Assembly Path="/Users/zhaosp/.nuget/packages/polly/8.2.1/lib/net6.0/Polly.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=0e695c3e_002D7d13_002D4327_002D914e_002Ddef32f301725/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=fc71d0f9_002D0535_002D4716_002D9ec7_002Da7e39fb75651/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="OptionalTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Locks.LockDemo.Test&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Locks.LockDemo.TestAsync&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Cache.OptionalTestDemo.OptionalTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Cache.OptionalTestDemo.OptionalTest2&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Cache.OptionalTestDemo.OptionalTestEqualsWithHasValue&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Cache.OptionalTestDemo.OptionalTestEqualsWithHasValue2&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=37a7645e_002D2254_002D4d26_002D84ff_002D6a72a3d3375d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Locks.LockDemo.Test&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::CCD16ADE-01F2-44EF-B985-DE5A0E8102CE::net6.0::TestProject.Locks.LockDemo.TestV2&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
