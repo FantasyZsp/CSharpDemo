@@ -32,4 +32,21 @@ public static class SpelExpressionParserUtils
 
         return key;
     }
+    
+    public static string GenerateKeyByEl(IDictionary<string, object?> paramMap, string expression)
+    {
+        if (expression is null or "")
+        {
+            throw new ExtractKeyException("expression is required");
+        }
+        
+        var key = (string) ExpressionEvaluator.GetValue(null, expression, paramMap);
+
+        if (string.IsNullOrEmpty(key))
+        {
+            throw new ExtractKeyException("key is required");
+        }
+
+        return key;
+    }
 }

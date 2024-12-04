@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using Flurl.Http;
 using Polly;
+using Polly.Fallback;
 using Polly.Retry;
 using TestProject.BaseApi.Models;
 using Xunit;
@@ -39,6 +41,59 @@ public class PollyDemo
     }
 
     [Fact]
+    public async Task PollyRetryTest2()
+    {
+        try
+        {
+            var res = await Policy<Kid>
+                .Handle<Exception>()
+                .FallbackAsync(_ => throw new FormatException("test"))
+                .WrapAsync(Policy
+                    .Handle<RetryableException>()
+                    .WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Min(1, i * 3)), (exception, _, retryCount, _) => { _testOutputHelper.WriteLine(retryCount.ToString()); }))
+                // var res = await Policy
+                //     .Handle<RetryableException>()
+                //     .WaitAndRetryAsync(3, i => TimeSpan.FromSeconds(Math.Max(2, i * 3)), (exception, _, retryCount, _) =>
+                //     {
+                //         _testOutputHelper.WriteLine(retryCount.ToString());
+                //     })
+                //     .WrapAsync(FallbackPolicy<Kid>
+                //         .Handle<Exception>()
+                //         .FallbackAsync(_ => throw new FormatException("test")))
+                .ExecuteAsync(async () =>
+                {
+                    try
+                    {
+                        _testOutputHelper.WriteLine("invoke");
+                        await Task.CompletedTask;
+                        DoSth();
+                        return Kid.DefaultGGKid;
+                    }
+                    catch (FlurlHttpException ex) when (ex.StatusCode != 200)
+                    {
+                        throw new RetryableException(ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new RetryableException(ex.Message);
+                    }
+                });
+            _testOutputHelper.WriteLine(res.ToString());
+        }
+        catch (Exception e)
+        {
+            _testOutputHelper.WriteLine(e.ToString());
+        }
+
+        _testOutputHelper.WriteLine("finish");
+    }
+
+    public void DoSth()
+    {
+        throw new RetryableException("xxx");
+    }
+
+    [Fact]
     public async Task PollyRetry_Test()
     {
         var kid = await Policy
@@ -49,7 +104,7 @@ public class PollyDemo
             // 2. 指定重试次数和重试策略
             .RetryAsync(3, (exception, retryCount, context) =>
             {
-                _testOutputHelper.WriteLine(context.ToString());
+                _testOutputHelper.WriteLine((exception.Exception == null).ToString());
                 _testOutputHelper.WriteLine($"开始第 {retryCount} 次重试：");
             })
             // 3. 执行具体任务
@@ -61,12 +116,20 @@ public class PollyDemo
     {
         return Policy
             .Handle<Exception>()
-            .WaitAndRetryAsync(3, i => TimeSpan.FromMilliseconds(Math.Min(500, 200 * (int)Math.Pow(2, i - 1))));
+            .WaitAndRetryAsync(3, i => TimeSpan.FromMilliseconds(Math.Min(500, 200 * (int) Math.Pow(2, i - 1))));
     }
 
     private Task<Kid> KidException()
     {
         _testOutputHelper.WriteLine($"invoked at {DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}");
         throw new KidException("error");
+    }
+}
+
+public class RetryableException : Exception
+{
+    public RetryableException(string message)
+        : base(message)
+    {
     }
 }

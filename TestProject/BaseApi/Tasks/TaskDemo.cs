@@ -34,6 +34,11 @@ public class TaskDemo
 
         await Task.Delay(2000);
     }
+    [Fact]
+    public async Task TaskInvoke()
+    {
+        await One();
+    }
 
     private async Task<string> GetGuid()
     {
@@ -49,5 +54,16 @@ public class TaskDemo
     {
         await Task.CompletedTask;
         _testOutputHelper.WriteLine($"Go invoked by {Thread.CurrentThread.Name} {Thread.CurrentThread.ManagedThreadId}");
+    }
+    private async Task One()
+    {
+        _testOutputHelper.WriteLine($"One {DateTime.Now}");
+        await Two();
+    }
+    private async Task Two()
+    {
+        _testOutputHelper.WriteLine($"Two {DateTime.Now}");
+        await Task.Delay(1000);
+        _testOutputHelper.WriteLine($"Twoafter {DateTime.Now}");
     }
 }

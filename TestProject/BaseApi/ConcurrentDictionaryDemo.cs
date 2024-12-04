@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
+using System.Linq;
 using DotNetCommon.Extensions;
 using TestProject.BaseApi.Models;
 using Xunit;
@@ -65,12 +66,11 @@ public class ConcurrentDictionaryDemo
             Sex = SexEnum.GG
         }, DateTime.Now));
         var orAdd = concurrentDictionary.GetOrAdd("zzz1", name => null);
-        _testOutputHelper.WriteLine((orAdd == null).ToString());
-        _testOutputHelper.WriteLine(concurrentDictionary.ContainsKey("zzz1").ToString());
-
-
+        Assert.True(orAdd == null);
+        Assert.True(concurrentDictionary.ContainsKey("zzz1"));
         var tryGetValue = concurrentDictionary.TryGetValue("zzz1", out var xxx);
-        _testOutputHelper.WriteLine(tryGetValue.ToString());
+        Assert.True(tryGetValue);
+        Assert.True(xxx == null);
     }
 
     [Fact]
@@ -91,5 +91,20 @@ public class ConcurrentDictionaryDemo
         concurrentDictionary["1"] = Kid.DefaultGGKid;
 
         _testOutputHelper.WriteLine(concurrentDictionary.ToJson());
+    }
+
+    [Fact]
+    public void DicNullKey()
+    {
+        var concurrentDictionary = new ConcurrentDictionary<(string, string), Kid>();
+        concurrentDictionary.TryAdd(("1", "1"), new Kid()
+        {
+            Name = "newName",
+            Age = 1,
+            Sex = SexEnum.MM
+        });
+        var value = concurrentDictionary.FirstOrDefault(e => e.Key.Item1 == "2").Value;
+
+        _testOutputHelper.WriteLine(value?.ToString());
     }
 }

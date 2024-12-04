@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DotNetCommon.Extensions;
 using Spring.Expressions;
 using StackExchange.Redis;
 using TestProject.SpEL;
@@ -28,6 +29,11 @@ public class StackExchangeRedisTest
 
         _testOutputHelper.WriteLine($"workerThreads {workerThreads}, completionPortThreads {completionPortThreads}");
         const string redisString = "127.0.0.1:6379,password=123456,abortConnect=false";
+        // var options = ConfigurationOptions.Parse(redisString);
+
+        // options.SocketManager =
+        //     new SocketManager("test", 100, SocketManager.SocketManagerOptions.UseThreadPool);
+
         var redis = await ConnectionMultiplexer.ConnectAsync(redisString);
 
         if (redis.IsConnected)
@@ -35,14 +41,14 @@ public class StackExchangeRedisTest
             _testOutputHelper.WriteLine("xxx");
         }
 
-        var list = Enumerable.Range(1, 10000).ToList();
+        var list = Enumerable.Range(1, 100000).ToList();
 
 
         await Parallel.ForEachAsync(list, new ParallelOptions() {MaxDegreeOfParallelism = 1000}, async (number, _) =>
         {
-            var stringSetAsync = await redis.GetDatabase(0).StringSetAsync("tmp:testTimeOut:" + number, number, TimeSpan.FromMilliseconds(30000));
-            var values =  redis.GetDatabase(0).StringGetAsync("tmp:testTimeOut:" + number);
-            // _testOutputHelper.WriteLine(values);
+            var stringSetAsync = await redis.GetDatabase(0).StringSetAsync("tmp:testTimeOut1:" + number, number, TimeSpan.FromMilliseconds(30000));
+            var values =await redis.GetDatabase(0).StringGetAsync("tmp:testTimeOut1:" + number);
+            // _testOutputHelper.WriteLine(stringSetAsync.ToString());
         });
         //
         // var tasks = new List<Task>();
@@ -61,5 +67,6 @@ public class StackExchangeRedisTest
 
         // Task.WaitAll(tasks.ToArray());
         await Task.Delay(1000);
+        _testOutputHelper.WriteLine("finish");
     }
 }

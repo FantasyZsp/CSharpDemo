@@ -54,6 +54,8 @@ namespace TestProject.BaseApi
                 .Where(dt => dt != new DateTime(1970, 1, 1))
                 .Select(dt => dt)
                 .ToList();
+            Assert.Throws<InvalidOperationException>(() => dateTimes.Min());
+            dateTimes.Sort();
             DateTime? min = dateTimes.Any() ? dateTimes.Min() : null;
             DateTime? max = dateTimes.Any() ? dateTimes.Max() : null;
             // var max = list.Where(dt => dt != new DateTime(2021, 8, 8)).Select(dt => dt).Max();

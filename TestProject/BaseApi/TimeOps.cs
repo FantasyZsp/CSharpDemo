@@ -23,6 +23,15 @@ namespace TestProject.BaseApi
             var dateTime2 = new DateTime(1970, 1, 1);
             _testOutputHelper.WriteLine((dateTime == dateTime2).ToString());
         }
+        [Fact]
+        public void Test_DateTime_Parse()
+        {
+            DateTime dateTime = DateTime.ParseExact("20240710120407", "yyyyMMddHHmmss", CultureInfo.InvariantCulture);
+            // 将 DateTime 对象转换为 Unix 时间戳
+            DateTimeOffset dateTimeOffset = new DateTimeOffset(dateTime);
+            long unixTimestamp = dateTimeOffset.ToUnixTimeMilliseconds();
+            _testOutputHelper.WriteLine(unixTimestamp.ToString());
+        }
 
         [Fact]
         public void Test_DateTime_AddHours()
@@ -81,6 +90,26 @@ namespace TestProject.BaseApi
 
             var time = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTimeMinuteFormatted, 0);
             _testOutputHelper.WriteLine(time.ToString(CultureInfo.InvariantCulture));
+        }
+
+
+        [Fact]
+        public void Test_DateTime_TotalSeconds()
+        {
+            var dateTime = DateTime.Now;
+            var utcNow = DateTime.UtcNow;
+
+            _testOutputHelper.WriteLine(GetTimeStamp(dateTime).ToString());
+            _testOutputHelper.WriteLine(GetTimeStamp(utcNow).ToString());
+            _testOutputHelper.WriteLine((GetTimeStamp(dateTime) - GetTimeStamp(utcNow)).ToString());
+            _testOutputHelper.WriteLine(DateTimeOffset.Now.ToUnixTimeSeconds().ToString());
+            _testOutputHelper.WriteLine(DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString());
+        }
+
+        public long GetTimeStamp(DateTime dateTime)
+        {
+            TimeSpan ts = dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds);
         }
     }
 }

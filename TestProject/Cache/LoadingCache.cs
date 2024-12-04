@@ -5,7 +5,7 @@ using ZiggyCreatures.Caching.Fusion;
 
 namespace TestProject.Cache;
 #nullable enable
-public class LoadingCache<TKey, TValue> where TValue : class
+public class LoadingCache<TKey, TValue>
 {
     public IFusionCache Cache { get; }
     private int LoadSoftTime { get; }
@@ -78,7 +78,7 @@ public class LoadingCache<TKey, TValue> where TValue : class
         var realKey = await KeyBuilder(key);
         var maybeValue = await Cache.TryGetAsync<TValue?>(realKey);
         var finalValue = maybeValue.HasValue ? maybeValue.Value : default;
-        return Optional<TValue?>.FromValue(finalValue, maybeValue.HasValue);
+        return Optional<TValue?>.FromHasValue(finalValue, maybeValue.HasValue);
     }
 
     public async Task<TValue?> GetOrDefaultAsync(TKey key, TValue? defaultValue)

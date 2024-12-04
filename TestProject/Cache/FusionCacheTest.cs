@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DotNetCommon.Extensions;
 using TestProject.BaseApi.Models;
@@ -59,7 +60,66 @@ public class FusionCacheTest
         var orSet2Value = orSet2.Value;
         _testOutputHelper.WriteLine((orSet2Value == null).ToString());
     }
-    
+
+    /// <summary>
+    /// 缓存项过期时间
+    /// </summary>
+    [Fact]
+    public async Task TestItemExpire()
+    {
+        var cache = new FusionCache(new FusionCacheOptions());
+        var cacheItemWithExpire = await CacheItemWithExpire(cache,4); // 4秒过期,3秒加载
+        _testOutputHelper.WriteLine((cacheItemWithExpire.GetValueOrDefault() - DateTime.Now).TotalMilliseconds.ToString());
+        var cacheItemWithExpire2 = await CacheItemWithExpire(cache,4); // 4秒过期
+        Assert.Equal(cacheItemWithExpire, cacheItemWithExpire2);
+        _testOutputHelper.WriteLine((cacheItemWithExpire2.GetValueOrDefault() - DateTime.Now).TotalMilliseconds.ToString());
+        
+        await Task.Delay(3500);
+        var refreshing = await CacheItemWithExpire(cache,4); // 触发加载，返回旧值
+        Assert.Equal(cacheItemWithExpire, refreshing);
+        await Task.Delay(200);
+        var refreshed = await CacheItemWithExpire(cache,4);  // 返回加载完毕的
+        Assert.NotEqual(refreshed, refreshing);
+        _testOutputHelper.WriteLine((refreshed.GetValueOrDefault() - DateTime.Now).TotalMilliseconds.ToString());
+
+    }
+
+    private static async Task<DateTime?> CacheItemWithExpire(IFusionCache cache, int key)
+    {
+       return await cache.GetOrSetAsync(key.ToString(), async (FusionCacheFactoryExecutionContext<DateTime?> ctx, CancellationToken ct) =>
+        {
+            var expireAt = await LoadAndSetExpireTime(key, ctx);
+            return expireAt;
+        });
+    }
+
+    private static async Task<DateTime?> LoadAndSetExpireTime(int key, FusionCacheFactoryExecutionContext<DateTime?> ctx)
+    {
+        var expireAt = await Task.FromResult(Build(key));
+        if (expireAt is null)
+        {
+            ctx.Options.Duration = TimeSpan.FromMinutes(5);
+        }
+        else
+        {
+            var duration = expireAt.GetValueOrDefault() - DateTime.Now ;
+            var eagerDuration = duration - TimeSpan.FromSeconds(1);
+            ctx.Options.Duration = duration;
+            // ctx.Options.FailSafeThrottleDuration = TimeSpan.FromMilliseconds(100); // 故障免load
+            // ctx.Options.FailSafeMaxDuration = TimeSpan.FromSeconds(1); // 旧值存在
+            ctx.Options.FactorySoftTimeout = TimeSpan.FromMilliseconds(100);
+            ctx.Options.FactoryHardTimeout = TimeSpan.FromSeconds(100);
+            ctx.Options.EagerRefreshThreshold = (float?) (eagerDuration.TotalMilliseconds / duration.TotalMilliseconds);  
+        }
+
+        return expireAt;
+    }
+
+    private static DateTime? Build(int count)
+    {
+        return DateTime.Now.AddSeconds(count);
+    }
+
     /// <summary>
     /// 可以缓存null
     /// </summary>
@@ -68,12 +128,12 @@ public class FusionCacheTest
     {
         var cache = new FusionCache(new FusionCacheOptions());
 
-        
+
         var orSetAsync = await cache.GetOrSetAsync("nullable", async _ => await Task.FromResult((string) null));
         Assert.Null(orSetAsync);
         Task.Run(() => { cache.Dispose(); });
         await Task.Delay(100);
-        
+
         var orSet = cache.GetOrSet("nullable", (string) null);
         Assert.Null(orSet);
 

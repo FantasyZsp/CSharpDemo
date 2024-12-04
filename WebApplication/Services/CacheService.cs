@@ -10,6 +10,13 @@ public class CacheService
     public virtual async Task<Girl> GetById(string id)
     {
         return await Task.FromResult(new Girl {Id = id, Name = "name", Age = 18});
+    }  
+    
+    
+    [Cacheable(key: "#girl.id", Prefix = "test", Order = 1, Ttl = 10_000)]
+    public virtual async Task<Girl> GetByDto(Girl girl)
+    {
+        return await Task.FromResult(new Girl {Id = girl.Id, Name = "name", Age = 18});
     }
 
     [CachePut(key: "#id", Prefix = "test", Order = 1, Ttl = 10_000)]

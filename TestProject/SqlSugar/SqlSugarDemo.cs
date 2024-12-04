@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using SqlSugar;
+using TestProject.FreeSql;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -20,7 +22,7 @@ namespace TestProject.SqlSugar
         {
             var db = new SqlSugarClient(new ConnectionConfig()
             {
-                ConnectionString = @"Server=localhost;Database=csharp_demo;Uid=root;Pwd=123456;", //连接符字串
+                ConnectionString = @"Server=zhaosp-win;Database=csharp_demo;Uid=root;Pwd=123456;", //连接符字串
                 DbType = DbType.MySql, //数据库类型
                 IsAutoCloseConnection = true //不设成true要手动close
             });
@@ -125,6 +127,50 @@ namespace TestProject.SqlSugar
         }
 
         [Fact]
+        public void Test_UpdateColumnsByWhereBug_SimpleClient()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CustomerSugar>();
+            var customer = new Customer
+            {
+                Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", CardId = 11, Config = "config", Email = "email"
+            };
+
+            var customerSugar = Mapping<CustomerSugar, Customer>(customer);
+            // var affRows = simpleClient.Update(cc => new Customer
+            // {
+            //     Id = 2, Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", CardId = 11, Config = "config", Email = "email"
+            // }, cc => cc.Id == customer.Id);
+
+            //
+            // var affRows = sqlSugar.Updateable<Customer>().SetColumns(cc => new Customer
+            // {
+            //     Id = 2, Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", CardId = 11, Config = "config", Email = "email"
+            // }, true).Where(cc => cc.Id == customer.Id).ExecuteCommand();
+
+            // var affRows = sqlSugar.Updateable<CustomerSugar>().SetColumns(cc => Mapping<CustomerSugar, Customer>(customer), true).Where(cc => cc.CardId == customer.CardId).ExecuteCommand();
+            var affRows = sqlSugar.Updateable<CustomerSugar>().SetColumns(cc => new CustomerSugar
+            {
+                Name = "testInsertOrUpdate3", Mark = "Test_UpdateBatchById_Repository", Config = "config", Email = "email"
+            }, true).Where(cc => cc.Name == customer.Name).ExecuteCommand();
+
+            _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        static R Mapping<R, T>(T model)
+        {
+            R result = Activator.CreateInstance<R>();
+            foreach (PropertyInfo info in typeof(R).GetProperties())
+            {
+                PropertyInfo? pro = typeof(T).GetProperty(info.Name);
+                if (pro != null)
+                    info.SetValue(result, pro.GetValue(model));
+            }
+
+            return result;
+        }
+
+        [Fact]
         public void Test_UpdateNonNullColumnsByWhere_SimpleClient()
         {
             var sqlSugar = CreateLocalSqlSugar();
@@ -172,6 +218,15 @@ namespace TestProject.SqlSugar
             //     .ExecuteReturnEntityAsync();
 
             _testOutputHelper.WriteLine(affRows.ToString());
+        }
+
+        [Fact]
+        public async void Test_ById()
+        {
+            var sqlSugar = CreateLocalSqlSugar();
+            var simpleClient = sqlSugar.GetSimpleClient<CardSugar>();
+            var inSingleAsync = await simpleClient.AsQueryable().InSingleAsync(1230001);
+            _testOutputHelper.WriteLine(inSingleAsync.ToString());
         }
     }
 }

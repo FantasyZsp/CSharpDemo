@@ -16,6 +16,49 @@ public class NumericExample
         _testOutputHelper = testOutputHelper;
     }
 
+  
+    
+    [Fact]
+    public void Device45Test()
+    {
+
+        _testOutputHelper.WriteLine(Math.Round(138.0 / 45).ToString());
+        
+       
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(0).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(22).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(22.5).ToString());
+        
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(37.5).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(45).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(60).ToString());
+        
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(67.5).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(90).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(110).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(132.5).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(111.2222).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(135).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(140).ToString());
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(150).ToString());
+        
+        _testOutputHelper.WriteLine(CorrectToNearestAngle(180).ToString());
+    }
+    
+    public static double CorrectToNearestAngle(double degree)
+    {
+        degree %= 360;
+        if (degree < 0) degree += 360;
+
+        var nearest45 = Math.Round(degree / 45) * 45;
+        var nearest90 = Math.Round(degree / 90) * 90;
+
+        var distTo45 = Math.Abs(degree - nearest45);
+        var distTo90 = Math.Abs(degree - nearest90);
+
+        return distTo45 < distTo90 ? nearest45 : nearest90;
+    }
+    
     [Fact]
     public void TestNull()
     {

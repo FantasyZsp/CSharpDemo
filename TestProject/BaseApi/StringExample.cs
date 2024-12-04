@@ -21,6 +21,16 @@ public class StringExample
     }
 
     [Fact]
+    public void TestStringDefault()
+    {
+        string test = default;
+        string? nullableStr = default;
+        string? nullableStr2 = default(string?);
+        _testOutputHelper.WriteLine(test ?? "1111");
+        _testOutputHelper.WriteLine(nullableStr ?? "2222");
+    }
+
+    [Fact]
     public void TestStringMatch()
     {
         var path = "abc";

@@ -11,4 +11,10 @@ namespace TestProject.FreeSql
         public string Mark { get; set; }
         public string Config { get; set; }
     }
+
+    public class CustomerDto
+    {
+        public uint? ID { get; set; }
+        public string Name { get; set; }
+    }
 }
