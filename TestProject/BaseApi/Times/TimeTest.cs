@@ -183,6 +183,25 @@ public class TimeTest
     }
 
     [Fact]
+    public void TestDateTimeOffsetParse2()
+    {
+   
+        var dateTimeOffset0 = DateTimeOffset.Parse("2022-09-22T20:09:51.412000+08:00");
+        _testOutputHelper.WriteLine(dateTimeOffset0.DateTime.ToString(CultureInfo.InvariantCulture));
+        var utcOffset = TimeZoneInfo.Local.BaseUtcOffset;
+
+        var dateTime = DateTime.Parse("2022-09-22T12:09:51Z");
+        var time = dateTime.Add(utcOffset);
+        _testOutputHelper.WriteLine(time.ToString(CultureInfo.InvariantCulture));
+        
+        var dateTime2 = DateTime.Parse("2022-09-22T20:09:51.412000+07:00");
+        _testOutputHelper.WriteLine(dateTime2.ToString(CultureInfo.InvariantCulture));
+
+        var serializeObject = JsonConvert.SerializeObject(dateTime);
+        _testOutputHelper.WriteLine(serializeObject);
+    }
+
+    [Fact]
     public void GetMonthCrossedCount()
     {
         var dateTime = DateTime.Parse("2021-02-19");

@@ -18,12 +18,6 @@ public class SharedConcurrencyLimiter
         _testOutputHelper = testOutputHelper;
     }
 
-    private async Task<string> SlowOne(HttpClient client)
-    {
-        var httpResponseMessage = await client.GetAsync("https://decogateway-dev.123kanfang.com/taskprocessapi/houseshape/GetHouseInfo?packageId=huxingtu_8a231177983d48b7bbfef3ae53c0e9f6");
-        return httpResponseMessage.ToJson();
-    }
-
     [Fact]
     public async Task TestSlidingWindowRateLimiter()
     {

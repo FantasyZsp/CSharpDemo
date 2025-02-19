@@ -17,4 +17,20 @@
         {
         }
     }
+
+
+    public class Animal
+    {
+        public string Name { get; set; }
+    }
+
+    public class Dog : Animal
+    {
+        public string NickName { get; set; }
+    }
+
+    public class Cat : Animal
+    {
+        public string LovelyName { get; set; }
+    }
 }
